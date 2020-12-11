@@ -1,0 +1,15 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+login {
+  background-color: #FFE53B;
+  background-image: linear-gradient(147deg, #FFE53B 0%, #FF2525 74%);
+  
+}
+
+/* Found a great dominant color detector for images at 'https://imagecolorpicker.com'.
+  This can help pick what colors would go well with your background image.*/
+
+  /* 404 Error page */

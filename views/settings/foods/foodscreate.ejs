@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<%- include('../../partials/header', {title: 'Create Food'}); %>
+
+<body>
+    <% include ../../partials/navbar %>
+    <div class="container">
+        <br>
+        <h1><%= title %></h1>
+        <p>Create a new food to add to the database</p>
+        <div class="container-fluid" style="width: 18rem;">
+            <form method ="POST" action="/settings/foods/create">
+                <div class="form-group" col-4>
+                    <input required type="text" class="form-control" placeholder="Name of food" name="nameoffood">
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <% include ../../partials/scripts %>
+</body>
+
+</html>

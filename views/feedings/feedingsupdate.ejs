@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<%- include('../partials/header', {title: 'Home Page'}); %>
+
+<body>
+    <% include ../partials/navbar %>
+    <div class="container-fluid">
+        <br>
+        <h1><%= title %></h1>
+        <p>Update Feedings</p>
+        <form method="POST" action="/feedings/update">
+            <input type="hidden" name="id" value="<%= data._id %>"/>
+            <div class="container-fluid" style="width: 18rem;">
+                <div class="col" col-4>
+                    <input type="text" class="form-control" placeholder="Bird" name="Bird" value="<%= data.Bird %>">
+                </div>
+                <br>
+                <div class="col" col-4>
+                    <input type="text" class="form-control" placeholder="Food" name="Food" value="<%= data.Food %>">
+                </div>
+                <br>
+                <div class="col" col-4>
+                    <input type="text" class="form-control" placeholder="Amount Fed" name="AmountFed" value="<%= data.AmountFed %>">
+                </div>
+                <br>
+                <div class="col" col-4>
+                    <input type="text" class="form-control" placeholder="Leftover Food" name="LeftoverFood" value="<%= data.LeftoverFood %>">
+                </div>
+                <br>
+                <div class="col" col-4>
+                    <input type="text" class="form-control" placeholder="Medicine" name="Medicine" value="<%= data.Medicine %>">
+                </div>
+                <br> 
+                <div class="col" col-4>
+                    <input type="text" class="form-control" placeholder="Goal Weight" name="GoalWeight" value="<%= data.GoalWeight %>">
+                </div>
+                <br> 
+                <div class="col" col-4>
+                    <input type="text" class="form-control" placeholder="Actual Weight" name="ActualWeight" value="<%= data.ActualWeight %>">
+                </div>
+                <br>
+                <div class="col" col-4>
+                    <input type="text" class="form-control" placeholder="Weather Conditions" name="WeatherConditions" value="<%= data.WeatherConditions %>">
+                </div>
+                <br>
+                <div class="col" col-4>
+                    <input type="text" class="form-control" placeholder="Feeder" name="Feeder" value="<%= data.Feeder %>">
+                </div>
+                <br>
+                <div class="col" col-4>
+                    <input type="text" class="form-control" placeholder="Comments" name="Comments" value="<%= data.Comments %>">
+                </div>
+                <br>
+                <div class="col" col-4>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <% include ../partials/scripts %>
+</body>
+
+</html>
