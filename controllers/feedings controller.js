@@ -70,7 +70,7 @@ exports.post_feedings_create = function (req, res) {
         GoalWeight: req.body.GoalWeight,
         ActualWeight: req.body.ActualWeight,
         WeatherConditions: req.body.WeatherConditions,
-        Feeder: currentUser.firstName + " " + currentUser.lastName,
+        Feeder: res.locals.user.firstName + ' ' + res.locals.user.lastName,
         Comments: req.body.Comments
     });
     newFeedings.save(function (err) {
