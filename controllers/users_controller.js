@@ -131,6 +131,7 @@ exports.put_update_user_image = function (req, res) {
     }
     
     console.log(obj.img.data);
+    console.log("hi");
 
     const updateUser = {
         profileImage: obj.img
@@ -143,18 +144,24 @@ exports.put_update_user_image = function (req, res) {
             // handle error
             console.log(err);
         } else {
-            res.redirect('settings/users');
+            res.redirect('/settings/users');
         }
     });
-};
+}
 
 exports.get_update_user_image = function (req, res) {
-    User.findOne({ _id: req.query.id }, function (err, user) {
-        if (err) {
-            // handle error
-        } else {
-            console.log(user);
-            res.render('users/addprofilepicture', { data: users });
-        }
-    });
-};
+    let currentUser = res.locals.user;
+    if (currentUser.role === "Admin") {
+        User.find({}, function (err, users) {
+            if (err) {
+                console.error(err);
+            } else {
+                res.render('settings/users/addprofilepicture', { data: users });
+            }
+        })
+    } else {
+        res.render('error');
+        console.log('You do not have permission to this page.')
+    }
+}
+

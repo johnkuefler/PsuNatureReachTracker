@@ -7,15 +7,15 @@
 
   <div class="container">
     <h1>Upload Profile Picture</h1>
-    <form action="./add-profile-picture" 
+    <form action="/settings/users/addprofilepicture" 
     enctype="multipart/form-data" method="POST"> 
     
       <input type="hidden" name="id" value="<%=data._id%>" />
       <div style="margin: 15px">
-        <img style="width: 125px; height: 125px;" id="imageView" src="/images/user.png" />
+        <img style="width: 125px; height: 125px;" id="imageView" src="/images/defaultuserprofilepic.png" />
       </div>
       <div>
-        <input type="file" id="image" accept="image/x-png,image/gif,image/jpeg"
+        <input type="file" id="image" accept="image/x-png,image/gif,image/jpeg, image/jpg"
                name="image" value="" required>
       </div> <br> 
       <button form-group col-4 type="submit" value="POST" class="btn btn-primary">

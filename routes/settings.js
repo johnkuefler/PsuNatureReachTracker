@@ -10,7 +10,7 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, './public/uploads')
+        cb(null, '../public/images')
     },
     filename: (req, file, cb) => {
         console.log(file.fieldname);
@@ -49,7 +49,7 @@ router.get('/users/update', authMiddleware.ensureAuthenticated, usersController.
 router.post('/users/update', authMiddleware.ensureAuthenticated, usersController.post_update_user);
 router.get('/users/delete', authMiddleware.ensureAuthenticated, usersController.delete_user);
 router.get('/users/updateimage', authMiddleware.ensureAuthenticated, usersController.get_update_user_image);
-router.post('/add-profile-picture', authMiddleware.ensureAuthenticated, upload.single('image'), usersController.put_update_user_image);
+router.post('/users/addprofilepicture', authMiddleware.ensureAuthenticated, upload.single('image'), usersController.put_update_user_image);
 
 
 

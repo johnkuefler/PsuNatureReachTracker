@@ -15,7 +15,7 @@
 
       <thead>
         <tr>
-          <td>Image</td>
+          <td>Profile Image</td>
           <td>Email</td>
           <td>First Name</td>
           <td>Last Name</td>
@@ -29,10 +29,10 @@
       <tr>
         <td>
           <% if (data[i].profileImage.data == "") {%>
-            <img style="width:150px;height:150px;" src="./images/user.png">
+            <img style="width:100px;height:100px;" src="../images/defaultuserprofilepic.png">
             </>
             <% } else { %>
-                <img style="width:150px;height:150px;" src="data:image/<%= data[i].profileImage.contentType%>;base64,
+                <img style="width:100px;height:100px;" src="data:image/<%= data[i].profileImage.contentType%>;base64,
                 <%= data[i].profileImage.data.toString('base64')%>">
             <% } %>
         </td>
