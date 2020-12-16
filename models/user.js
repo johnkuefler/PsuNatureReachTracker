@@ -30,7 +30,12 @@ const userSchema = new mongoose.Schema(
         passwordIsExpired: {
             type: Boolean,
             required:false
-        }
+        },
+        profileImage: {
+            data: Buffer,
+            contentType: String,
+            required: false
+        },
     },
 );
 

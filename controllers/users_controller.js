@@ -1,4 +1,7 @@
 const User = require('../models/user');
+var fs = require('fs');
+var path = require('path');
+var multer = require('multer');
 
 exports.get_users = function (req, res) {
     let currentUser = res.locals.user;
@@ -78,6 +81,8 @@ exports.post_create_user = function (req, res) {
     user.password = user.generateHash(req.body.password);
     user.role = req.body.role;
     user.passwordIsExpired = true;
+    user.profileImage.data ="";
+    user.profileImage.contentType = "";
 
     user.save(function (err) {
         if (err) {
@@ -116,3 +121,40 @@ exports.delete_user = function (req, res) {
         }
     })
 }
+
+exports.put_update_user_image = function (req, res) {
+    var obj = {
+        img: {
+            data: fs.readFileSync(path.join('./public/uploads/' + req.file.filename)),
+            contentType: 'image/png'
+        }
+    }
+    
+    console.log(obj.img.data);
+
+    const updateUser = {
+        profileImage: obj.img
+    };
+
+    fs.unlinkSync(path.join('./public/uploads/' + req.file.filename));
+
+    User.findOneAndUpdate({ _id: req.body.id }, updateUser, function (err, data) {
+        if (err) {
+            // handle error
+            console.log(err);
+        } else {
+            res.redirect('settings/users');
+        }
+    });
+};
+
+exports.get_update_user_image = function (req, res) {
+    User.findOne({ _id: req.query.id }, function (err, user) {
+        if (err) {
+            // handle error
+        } else {
+            console.log(user);
+            res.render('users/addprofilepicture', { data: users });
+        }
+    });
+};

@@ -1,9 +1,27 @@
-var express = require('express');
+const express = require('express');
 const { use } = require('passport');
-var router = express.Router();
+const router = express.Router();
 const settingsController = require('../controllers/settings controller');
 const usersController = require('../controllers/users_controller');
 const authMiddleware = require('../middleware/ensureAuthenticate');
+const fs = require('fs');
+const path = require('path');
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, './public/uploads')
+    },
+    filename: (req, file, cb) => {
+        console.log(file.fieldname);
+        cb(null, file.fieldname + '-' + Date.now())
+    }
+});
+
+const upload = multer({ storage: storage });
+
+
+
 
 /* GET home page. */
 router.get('/', authMiddleware.ensureAuthenticated, settingsController.get_settings);
@@ -30,6 +48,8 @@ router.post('/users/create', authMiddleware.ensureAuthenticated, usersController
 router.get('/users/update', authMiddleware.ensureAuthenticated, usersController.get_update_user);
 router.post('/users/update', authMiddleware.ensureAuthenticated, usersController.post_update_user);
 router.get('/users/delete', authMiddleware.ensureAuthenticated, usersController.delete_user);
+router.get('/users/updateimage', authMiddleware.ensureAuthenticated, usersController.get_update_user_image);
+router.post('/add-profile-picture', authMiddleware.ensureAuthenticated, upload.single('image'), usersController.put_update_user_image);
 
 
 
@@ -51,4 +71,10 @@ router.get('/birds/export', authMiddleware.ensureAuthenticated, settingsControll
 router.get('/foods/export', authMiddleware.ensureAuthenticated, settingsController.export_foods);
 router.get('/meds/export', authMiddleware.ensureAuthenticated, settingsController.export_meds);
 router.get('/users/export', authMiddleware.ensureAuthenticated, usersController.export_users);
+
+
+
+ 
+
+
 module.exports = router;
