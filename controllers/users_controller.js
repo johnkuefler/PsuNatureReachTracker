@@ -1,4 +1,7 @@
 const User = require('../models/user');
+var fs = require('fs');
+var path = require('path');
+var multer = require('multer');
 
 exports.get_users = function (req, res) {
     let currentUser = res.locals.user;
@@ -70,7 +73,7 @@ exports.post_update_user = function (req, res) {
 
 exports.post_create_user = function (req, res) {
 
-    let user = new User();
+    const user = new User();
 
     user.email = req.body.email;
     user.firstName = req.body.firstName;
@@ -78,6 +81,8 @@ exports.post_create_user = function (req, res) {
     user.password = user.generateHash(req.body.password);
     user.role = req.body.role;
     user.passwordIsExpired = true;
+    user.profileImage.data = "";
+    user.profileImage.contentType = "";
 
     user.save(function (err) {
         if (err) {
@@ -116,3 +121,47 @@ exports.delete_user = function (req, res) {
         }
     })
 }
+
+exports.put_update_user_image = function (req, res) {
+    var obj = {
+        img: {
+            data: fs.readFileSync(path.join('./public/uploads/' + req.file.filename)),
+            contentType: 'image/png'
+        }
+    }
+
+    const updateUser = {
+        profileImage: obj.img
+    };
+
+    console.log(updateUser);
+    
+    fs.unlinkSync(path.join('./public/uploads/' + req.file.filename));
+
+    User.findOneAndUpdate({ _id: req.body.id }, updateUser, function (err, data) {
+        if (err) {
+            // handle error
+            console.log(err);
+        } else {
+            console.log("image uploaded successfully");
+            res.redirect('/settings/users');
+        }
+    });
+};
+
+exports.get_update_user_image = function (req, res) {
+    let currentUser = res.locals.user;
+    if (currentUser.role === "Admin") {
+        User.findOne({_id: req.query._id}, function (err, user) {
+            if (err) {
+                console.error(err);
+            } else {
+                res.render('settings/users/addprofilepicture', { data: user });
+            }
+        })
+    } else {
+        res.render('error');
+        console.log('You do not have permission to this page.')
+    }
+}
+
