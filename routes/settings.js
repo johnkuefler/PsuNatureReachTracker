@@ -49,10 +49,6 @@ router.post('/users/create', authMiddleware.ensureAuthenticated, usersController
 router.get('/users/update', authMiddleware.ensureAuthenticated, usersController.get_update_user);
 router.post('/users/update', authMiddleware.ensureAuthenticated, usersController.post_update_user);
 router.get('/users/delete', authMiddleware.ensureAuthenticated, usersController.delete_user);
-router.get('/users/updateimage', authMiddleware.ensureAuthenticated, usersController.get_update_user_image);
-router.post('/users/addprofilepicture', authMiddleware.ensureAuthenticated, upload.single('image'), usersController.put_update_user_image);
-
-
 
 // Update routers
 router.get('/birds/update', authMiddleware.ensureAuthenticated, settingsController.get_birds_update);
@@ -74,7 +70,18 @@ router.get('/meds/export', authMiddleware.ensureAuthenticated, settingsControlle
 router.get('/users/export', authMiddleware.ensureAuthenticated, usersController.export_users);
 
 
+//User Image Router
+router.get('/users/updateimage', authMiddleware.ensureAuthenticated, usersController.get_update_user_image);
+router.post('/users/addprofilepicture', authMiddleware.ensureAuthenticated, upload.single('image'), usersController.put_update_user_image);
 
+//Food Image Router
+router.get('/foods/updatefoodimage', authMiddleware.ensureAuthenticated, settingsController.get_update_food_image);
+router.post('/foods/addfoodpicture', authMiddleware.ensureAuthenticated, upload.single('image'), settingsController.put_update_food_image);
+
+//Medication Image Router
+
+
+//Animal Image Router
  
 
 

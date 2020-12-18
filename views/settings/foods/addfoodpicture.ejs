@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<%- include('../../partials/header', {title: 'Add Food Picture'}); %>
+
+<body>
+  <% include ../../partials/navbar %>
+
+  <div class="container">
+    <h1>Upload Profile Picture</h1>
+    <form action="/settings/users/addfoodpicture" 
+    enctype="multipart/form-data" method="POST"> 
+    
+      <input type="hidden" name="id" value="<%=data._id%>" />
+      <div style="margin: 15px">
+        <img style="width: 125px; height: 125px;" id="imageView" src="/images/defaultfoodpic.png" />
+      </div>
+      <div>
+        <input type="file" id="image" accept="image/x-png,image/gif,image/jpeg"
+               name="image" value="" required>
+      </div> <br> 
+      <button form-group col-4 type="submit" value="POST" class="btn btn-primary">
+        Submit
+      </button>
+  </form> 
+
+  </div>
+
+  <% include ../../partials/scripts %>
+</body>
+
+</html>
+
+<script>
+ function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    
+    reader.onload = function(e) {
+      $('#imageView').attr('src', e.target.result);
+    }
+    
+    reader.readAsDataURL(input.files[0]); // convert to base64 string
+  }
+}
+$("#image").change(function() {
+  readURL(this);
+});
+</script>

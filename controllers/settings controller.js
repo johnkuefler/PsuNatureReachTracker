@@ -2,10 +2,11 @@ const Bird = require('../models/bird');
 const Food = require('../models/food');
 const Medication = require('../models/medication');
 const User = require('../models/user');
+var fs = require('fs');
+var path = require('path');
+var multer = require('multer');
 
 // Main get pages
-
-
 exports.get_settings = function (req, res) {
     let currentUser = res.locals.user;
     if (currentUser.role === "Admin") {
@@ -17,7 +18,6 @@ exports.get_settings = function (req, res) {
 }
 
 // Create get pages
-
 exports.get_create_bird = function (req, res) {
     let currentUser = res.locals.user;
     if (currentUser.role === "Admin") {
@@ -191,11 +191,16 @@ exports.post_create_bird = function (req, res) {
 }
 
 exports.post_create_food = function (req, res) {
-    let newFood = new Food({
-        name: req.body.nameoffood
-    });
 
-    newFood.save(function (err) {
+const food = new Food();
+
+food.name = req.body.nameoffood;
+food.foodImage.data = "";
+food.foodImage.contentType = "";
+
+    console.log(food);
+
+    food.save(function (err) {
         if (err) {
             console.log(err);
         } else {
@@ -341,4 +346,49 @@ exports.export_foods = async function (req, res) {
     res.header('Content-Type', 'text/csv');
     res.attachment('foods.csv');
     return res.send(csv);
+}
+
+//upload food image function
+exports.put_update_food_image = function (req, res) {
+    var obj = {
+        img: {
+            data: fs.readFileSync(path.join('./public/uploads/' + req.file.filename)),
+            contentType: 'image/png'
+        }
+    }
+
+    const updateFood = {
+        foodImage: obj.img
+    };
+
+    console.log(updateUser);
+    
+    fs.unlinkSync(path.join('./public/uploads/' + req.file.filename));
+
+    User.findOneAndUpdate({ _id: req.body.id }, updateFood, function (err, data) {
+        if (err) {
+            // handle error
+            console.log(err);
+        } else {
+            console.log("image uploaded successfully");
+            res.redirect('/settings/foods');
+        }
+    });
+};
+
+//find addfoodpicture view
+exports.get_update_food_image = function (req, res) {
+    let currentUser = res.locals.user;
+    if (currentUser.role === "Admin") {
+        User.findOne({_id: req.query._id}, function (err, food) {
+            if (err) {
+                console.error(err);
+            } else {
+                res.render('settings/foods/addfoodpicture', { data: food });
+            }
+        })
+    } else {
+        res.render('error');
+        console.log('You do not have permission to this page.')
+    }
 }
