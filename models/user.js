@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-const bcrypt   = require('bcrypt-nodejs');
+const bcrypt = require('bcrypt-nodejs');
+
+
 const userSchema = new mongoose.Schema(
     {
         firstName: {
@@ -50,4 +52,5 @@ userSchema.methods.validPassword = function(password) {
 };
 
 const User = mongoose.model('User', userSchema);
+
 module.exports = User;

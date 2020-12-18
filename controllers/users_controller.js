@@ -73,7 +73,7 @@ exports.post_update_user = function (req, res) {
 
 exports.post_create_user = function (req, res) {
 
-    let user = new User();
+    const user = new User();
 
     user.email = req.body.email;
     user.firstName = req.body.firstName;
@@ -81,7 +81,7 @@ exports.post_create_user = function (req, res) {
     user.password = user.generateHash(req.body.password);
     user.role = req.body.role;
     user.passwordIsExpired = true;
-    user.profileImage.data ="";
+    user.profileImage.data = "";
     user.profileImage.contentType = "";
 
     user.save(function (err) {
@@ -131,23 +131,24 @@ exports.put_update_user_image = function (req, res) {
     }
     
     console.log(obj.img.data);
-    console.log("hi");
+    
 
     const updateUser = {
         profileImage: obj.img
     };
+    
 
     fs.unlinkSync(path.join('./public/uploads/' + req.file.filename));
-
-    User.findOneAndUpdate({ _id: req.body.id }, updateUser, function (err, data) {
+    User.findOneAndUpdate({ _id: req.body._id }, updateUser, function (err, data) {
         if (err) {
             // handle error
             console.log(err);
         } else {
+            console.log("image uploaded successfully");
             res.redirect('/settings/users');
         }
     });
-}
+};
 
 exports.get_update_user_image = function (req, res) {
     let currentUser = res.locals.user;

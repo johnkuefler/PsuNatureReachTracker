@@ -8,9 +8,10 @@ const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
 
-const storage = multer.diskStorage({
+
+var storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, '../public/images')
+        cb(null, './public/uploads/')
     },
     filename: (req, file, cb) => {
         console.log(file.fieldname);
@@ -18,7 +19,7 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({ storage: storage });
+var upload = multer({ storage: storage });
 
 
 
