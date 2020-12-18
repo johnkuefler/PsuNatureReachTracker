@@ -129,17 +129,16 @@ exports.put_update_user_image = function (req, res) {
             contentType: 'image/png'
         }
     }
-    
-    console.log(obj.img.data);
-    
 
     const updateUser = {
         profileImage: obj.img
     };
-    
 
+    console.log(updateUser);
+    
     fs.unlinkSync(path.join('./public/uploads/' + req.file.filename));
-    User.findOneAndUpdate({ _id: req.body._id }, updateUser, function (err, data) {
+
+    User.findOneAndUpdate({ _id: req.body.id }, updateUser, function (err, data) {
         if (err) {
             // handle error
             console.log(err);
@@ -153,11 +152,11 @@ exports.put_update_user_image = function (req, res) {
 exports.get_update_user_image = function (req, res) {
     let currentUser = res.locals.user;
     if (currentUser.role === "Admin") {
-        User.find({}, function (err, users) {
+        User.findOne({_id: req.query._id}, function (err, user) {
             if (err) {
                 console.error(err);
             } else {
-                res.render('settings/users/addprofilepicture', { data: users });
+                res.render('settings/users/addprofilepicture', { data: user });
             }
         })
     } else {
