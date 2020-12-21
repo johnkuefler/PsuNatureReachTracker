@@ -211,11 +211,17 @@ food.foodImage.contentType = "";
 }
 
 exports.post_create_med = function (req, res) {
-    let newMed = new Medication({
-        name: req.body.nameofmedication
-    });
 
-    newMed.save(function (err) {
+
+const medication = new Medication();
+
+medication.name = req.body.nameofmedication;
+medication.medicationImage.data = "";
+medication.medicationImage.contentType = "";
+
+console.log(medication);
+
+    medication.save(function (err) {
         if (err) {
             console.log(err);
         } else {
@@ -361,11 +367,11 @@ exports.put_update_food_image = function (req, res) {
         foodImage: obj.img
     };
 
-    console.log(updateUser);
+    console.log(updateFood);
     
     fs.unlinkSync(path.join('./public/uploads/' + req.file.filename));
 
-    User.findOneAndUpdate({ _id: req.body.id }, updateFood, function (err, data) {
+    Food.findOneAndUpdate({ _id: req.body.id }, updateFood, function (err, data) {
         if (err) {
             // handle error
             console.log(err);
@@ -380,11 +386,56 @@ exports.put_update_food_image = function (req, res) {
 exports.get_update_food_image = function (req, res) {
     let currentUser = res.locals.user;
     if (currentUser.role === "Admin") {
-        User.findOne({_id: req.query._id}, function (err, food) {
+        Food.findOne({_id: req.query._id}, function (err, foods) {
             if (err) {
                 console.error(err);
             } else {
-                res.render('settings/foods/addfoodpicture', { data: food });
+                res.render('settings/foods/addfoodpicture', { data: foods });
+            }
+        })
+    } else {
+        res.render('error');
+        console.log('You do not have permission to this page.')
+    }
+}
+
+//upload medication image function
+exports.put_update_med_image = function (req, res) {
+    var obj = {
+        img: {
+            data: fs.readFileSync(path.join('./public/uploads/' + req.file.filename)),
+            contentType: 'image/png'
+        }
+    }
+
+    const updateMedication = {
+        medicationImage: obj.img
+    };
+
+    console.log(updateMedication);
+    
+    fs.unlinkSync(path.join('./public/uploads/' + req.file.filename));
+
+    Medication.findOneAndUpdate({ _id: req.body.id }, updateMedication, function (err, data) {
+        if (err) {
+            // handle error
+            console.log(err);
+        } else {
+            console.log("image uploaded successfully");
+            res.redirect('/settings/meds');
+        }
+    });
+};
+
+//find addmedicationpicture view
+exports.get_update_med_image = function (req, res) {
+    let currentUser = res.locals.user;
+    if (currentUser.role === "Admin") {
+        Medication.findOne({_id: req.query._id}, function (err, meds) {
+            if (err) {
+                console.error(err);
+            } else {
+                res.render('settings/meds/addmedicationpicture', { data: meds });
             }
         })
     } else {

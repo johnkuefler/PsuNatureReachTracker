@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
-<%- include('../../partials/header', {title: 'Add Food Picture'}); %>
+<%- include('../../partials/header', {title: 'Add Medication Picture'}); %>
 
 <body>
   <% include ../../partials/navbar %>
 
   <div class="container">
     <h1>Upload Profile Picture</h1>
-    <form action="/settings/foods/addfoodpicture" 
+    <form action="/settings/meds/addmedicationpicture" 
     enctype="multipart/form-data" method="POST"> 
     
       <input type="hidden" name="id" value="<%=data._id%>" />
       <div style="margin: 15px">
-        <img style="width: 125px; height: 125px;" id="imageView" src="/images/defaultfoodpic.png" />
+        <img style="width: 125px; height: 125px;" id="imageView" src="/images/defaultmedicationpic.png" />
       </div>
       <div>
         <input type="file" id="image" accept="image/x-png,image/gif,image/jpeg"

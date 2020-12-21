@@ -79,7 +79,8 @@ router.get('/foods/updatefoodimage', authMiddleware.ensureAuthenticated, setting
 router.post('/foods/addfoodpicture', authMiddleware.ensureAuthenticated, upload.single('image'), settingsController.put_update_food_image);
 
 //Medication Image Router
-
+router.get('/meds/updatemedicationimage', authMiddleware.ensureAuthenticated, settingsController.get_update_med_image);
+router.post('/meds/addmedicationpicture', authMiddleware.ensureAuthenticated, upload.single('image'), settingsController.put_update_med_image);
 
 //Animal Image Router
  
