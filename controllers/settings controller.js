@@ -2,10 +2,11 @@ const Bird = require('../models/bird');
 const Food = require('../models/food');
 const Medication = require('../models/medication');
 const User = require('../models/user');
+var fs = require('fs');
+var path = require('path');
+var multer = require('multer');
 
 // Main get pages
-
-
 exports.get_settings = function (req, res) {
     let currentUser = res.locals.user;
     if (currentUser.role === "Admin") {
@@ -17,7 +18,6 @@ exports.get_settings = function (req, res) {
 }
 
 // Create get pages
-
 exports.get_create_bird = function (req, res) {
     let currentUser = res.locals.user;
     if (currentUser.role === "Admin") {
@@ -174,13 +174,15 @@ exports.post_create_bird = function (req, res) {
         enabled = true;
     }
 
-    let newBird = new Bird({
-        species: req.body.species,
-        nickName: req.body.nickname,
-        enabled: enabled
-    });
+    const bird = new Bird();
 
-    newBird.save(function (err) {
+bird.species = req.body.species;
+bird.nickName = req.body.nickname;
+bird.enabled = enabled;
+bird.animalImage.data = "";
+bird.animalImage.contentType = "";
+
+    bird.save(function (err) {
         if (err) {
             console.log(err);
         } else {
@@ -191,11 +193,16 @@ exports.post_create_bird = function (req, res) {
 }
 
 exports.post_create_food = function (req, res) {
-    let newFood = new Food({
-        name: req.body.nameoffood
-    });
 
-    newFood.save(function (err) {
+const food = new Food();
+
+food.name = req.body.nameoffood;
+food.foodImage.data = "";
+food.foodImage.contentType = "";
+
+    console.log(food);
+
+    food.save(function (err) {
         if (err) {
             console.log(err);
         } else {
@@ -206,11 +213,17 @@ exports.post_create_food = function (req, res) {
 }
 
 exports.post_create_med = function (req, res) {
-    let newMed = new Medication({
-        name: req.body.nameofmedication
-    });
 
-    newMed.save(function (err) {
+
+const medication = new Medication();
+
+medication.name = req.body.nameofmedication;
+medication.medicationImage.data = "";
+medication.medicationImage.contentType = "";
+
+console.log(medication);
+
+    medication.save(function (err) {
         if (err) {
             console.log(err);
         } else {
@@ -341,4 +354,139 @@ exports.export_foods = async function (req, res) {
     res.header('Content-Type', 'text/csv');
     res.attachment('foods.csv');
     return res.send(csv);
+}
+
+//upload food image function
+exports.put_update_food_image = function (req, res) {
+    var obj = {
+        img: {
+            data: fs.readFileSync(path.join('./public/uploads/' + req.file.filename)),
+            contentType: 'image/png'
+        }
+    }
+
+    const updateFood = {
+        foodImage: obj.img
+    };
+
+    console.log(updateFood);
+    
+    fs.unlinkSync(path.join('./public/uploads/' + req.file.filename));
+
+    Food.findOneAndUpdate({ _id: req.body.id }, updateFood, function (err, data) {
+        if (err) {
+            // handle error
+            console.log(err);
+        } else {
+            console.log("image uploaded successfully");
+            res.redirect('/settings/foods');
+        }
+    });
+};
+
+//find addfoodpicture view
+exports.get_update_food_image = function (req, res) {
+    let currentUser = res.locals.user;
+    if (currentUser.role === "Admin") {
+        Food.findOne({_id: req.query._id}, function (err, foods) {
+            if (err) {
+                console.error(err);
+            } else {
+                res.render('settings/foods/addfoodpicture', { data: foods });
+            }
+        })
+    } else {
+        res.render('error');
+        console.log('You do not have permission to this page.')
+    }
+}
+
+//upload medication image function
+exports.put_update_med_image = function (req, res) {
+    var obj = {
+        img: {
+            data: fs.readFileSync(path.join('./public/uploads/' + req.file.filename)),
+            contentType: 'image/png'
+        }
+    }
+
+    const updateMedication = {
+        medicationImage: obj.img
+    };
+
+    console.log(updateMedication);
+    
+    fs.unlinkSync(path.join('./public/uploads/' + req.file.filename));
+
+    Medication.findOneAndUpdate({ _id: req.body.id }, updateMedication, function (err, data) {
+        if (err) {
+            // handle error
+            console.log(err);
+        } else {
+            console.log("image uploaded successfully");
+            res.redirect('/settings/meds');
+        }
+    });
+};
+
+//find addmedicationpicture view
+exports.get_update_med_image = function (req, res) {
+    let currentUser = res.locals.user;
+    if (currentUser.role === "Admin") {
+        Medication.findOne({_id: req.query._id}, function (err, meds) {
+            if (err) {
+                console.error(err);
+            } else {
+                res.render('settings/meds/addmedicationpicture', { data: meds });
+            }
+        })
+    } else {
+        res.render('error');
+        console.log('You do not have permission to this page.')
+    }
+}
+
+//upload medication image function
+exports.put_update_bird_image = function (req, res) {
+    var obj = {
+        img: {
+            data: fs.readFileSync(path.join('./public/uploads/' + req.file.filename)),
+            contentType: 'image/png'
+        }
+    }
+
+    const updateAnimal = {
+        animalImage: obj.img
+    };
+
+    console.log(updateAnimal);
+    
+    fs.unlinkSync(path.join('./public/uploads/' + req.file.filename));
+
+    Bird.findOneAndUpdate({ _id: req.body.id }, updateAnimal, function (err, data) {
+        if (err) {
+            // handle error
+            console.log(err);
+        } else {
+            console.log("image uploaded successfully");
+            res.redirect('/settings/birds');
+        }
+    });
+};
+
+//find addanimalpicture view
+exports.get_update_bird_image = function (req, res) {
+    let currentUser = res.locals.user;
+    if (currentUser.role === "Admin") {
+        Bird.findOne({_id: req.query._id}, function (err, birds) {
+            if (err) {
+                console.error(err);
+            } else {
+                res.render('settings/birds/addanimalpicture', { data: birds });
+            }
+        })
+    } else {
+        res.render('error');
+        console.log('You do not have permission to this page.')
+    }
 }
