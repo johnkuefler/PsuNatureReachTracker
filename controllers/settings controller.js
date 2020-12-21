@@ -174,13 +174,15 @@ exports.post_create_bird = function (req, res) {
         enabled = true;
     }
 
-    let newBird = new Bird({
-        species: req.body.species,
-        nickName: req.body.nickname,
-        enabled: enabled
-    });
+    const bird = new Bird();
 
-    newBird.save(function (err) {
+bird.species = req.body.species;
+bird.nickName = req.body.nickname;
+bird.enabled = enabled;
+bird.animalImage.data = "";
+bird.animalImage.contentType = "";
+
+    bird.save(function (err) {
         if (err) {
             console.log(err);
         } else {
@@ -436,6 +438,51 @@ exports.get_update_med_image = function (req, res) {
                 console.error(err);
             } else {
                 res.render('settings/meds/addmedicationpicture', { data: meds });
+            }
+        })
+    } else {
+        res.render('error');
+        console.log('You do not have permission to this page.')
+    }
+}
+
+//upload medication image function
+exports.put_update_bird_image = function (req, res) {
+    var obj = {
+        img: {
+            data: fs.readFileSync(path.join('./public/uploads/' + req.file.filename)),
+            contentType: 'image/png'
+        }
+    }
+
+    const updateAnimal = {
+        animalImage: obj.img
+    };
+
+    console.log(updateAnimal);
+    
+    fs.unlinkSync(path.join('./public/uploads/' + req.file.filename));
+
+    Bird.findOneAndUpdate({ _id: req.body.id }, updateAnimal, function (err, data) {
+        if (err) {
+            // handle error
+            console.log(err);
+        } else {
+            console.log("image uploaded successfully");
+            res.redirect('/settings/birds');
+        }
+    });
+};
+
+//find addanimalpicture view
+exports.get_update_bird_image = function (req, res) {
+    let currentUser = res.locals.user;
+    if (currentUser.role === "Admin") {
+        Bird.findOne({_id: req.query._id}, function (err, birds) {
+            if (err) {
+                console.error(err);
+            } else {
+                res.render('settings/birds/addanimalpicture', { data: birds });
             }
         })
     } else {

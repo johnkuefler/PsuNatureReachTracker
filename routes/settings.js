@@ -83,7 +83,9 @@ router.get('/meds/updatemedicationimage', authMiddleware.ensureAuthenticated, se
 router.post('/meds/addmedicationpicture', authMiddleware.ensureAuthenticated, upload.single('image'), settingsController.put_update_med_image);
 
 //Animal Image Router
- 
+router.get('/birds/updateanimalimage', authMiddleware.ensureAuthenticated, settingsController.get_update_bird_image);
+router.post('/birds/addanimalpicture', authMiddleware.ensureAuthenticated, upload.single('image'), settingsController.put_update_bird_image);
+
 
 
 module.exports = router;

@@ -26,10 +26,10 @@
         <tr>
           <td>
             <% if (data[i].medicationImage.data == "") {%>
-              <img style="width:100px;height:100px;" src="../images/defaultmedicationpic.png">
+              <img style="width:200px;height:200px;" src="../images/defaultmedicationpic.png">
               </>
               <% } else { %>
-                  <img style="width:125px;height:150px;" src="data:image/<%= data[i].medicationImage.contentType%>;base64,
+                  <img style="width:200px;height:200px;" src="data:image/<%= data[i].medicationImage.contentType%>;base64,
                   <%= data[i].medicationImage.data.toString('base64')%>">
               <% } %>
           </td>
