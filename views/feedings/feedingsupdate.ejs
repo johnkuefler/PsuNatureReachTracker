@@ -4,13 +4,18 @@
 
 <body>
     <% include ../partials/navbar %>
-    <div class="container-fluid">
+    <div class="container">
         <br>
         <h1><%= title %></h1>
         <p>Update Feedings</p>
         <form method="POST" action="/feedings/update">
             <input type="hidden" name="id" value="<%= data._id %>"/>
             <div class="container-fluid" style="width: 18rem;">
+                <div class="form-group" col-4>
+                    <div class="well">
+                        <input class="form-control" type="datetime-local" id="datetimepicker"></input>                  
+                    </div>
+                </div>
                 <div class="col" col-4>
                     <input type="text" class="form-control" placeholder="Bird" name="Bird" value="<%= data.Bird %>">
                 </div>

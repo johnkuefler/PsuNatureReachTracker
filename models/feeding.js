@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const feedingsSchema = new Schema({
-    Date: { type: Date, required: true, default: Date.now},
+    DateTime: { type: Date, required: true, max: Date.now},
     Bird: { type: String, required: true},
 	Food: { type: String, required: true},
 	AmountFed: { type: String, required: true},
