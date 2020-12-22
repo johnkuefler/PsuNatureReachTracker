@@ -17,11 +17,11 @@
             <td>Date</td>
             <td>Animal</td>
             <td>Food</td>
-            <td>Amount Fed</td>
-            <td>Leftover Food</td>
+            <td>Amount Fed (g)</td>
+            <td>Leftover Food (g)</td>
             <td>Medicine</td>
-            <td>Goal Weight</td>
-            <td>Actual Weight</td>
+            <td>Goal Weight (g)</td>
+            <td>Actual Weight (g)</td>
             <td>Weather Conditions</td>
             <td>Feeder</td>
             <td>Comments</td>
@@ -34,11 +34,11 @@
         <td><%=data[i].Date.toLocaleDateString("en-US", { hour: '2-digit', minute: '2-digit'}) %></td>
         <td><%=data[i].Bird%></td>
         <td><%=data[i].Food%></td>
-        <td><%=data[i].AmountFed%></td>
-        <td><%=data[i].LeftoverFood%></td>
+        <td><%=data[i].AmountFed%> g</td>
+        <td><%=data[i].LeftoverFood%> g</td>
         <td><%=data[i].Medicine%></td>
-        <td><%=data[i].GoalWeight%></td>
-        <td><%=data[i].ActualWeight%></td>
+        <td><%=data[i].GoalWeight%> g</td>
+        <td><%=data[i].ActualWeight%> g</td>
         <td><%=data[i].WeatherConditions%></td>
         <td><%=data[i].Feeder%></td>
         <td><%=data[i].Comments%></td>
