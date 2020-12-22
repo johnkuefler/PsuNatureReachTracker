@@ -61,7 +61,7 @@ exports.post_feedings_create = function (req, res) {
    let today = new Date();
    let currentUser = res.locals.user;
     let newFeedings = new Feeding({
-        DateTime: req.body.dateTime,
+        Date: req.body.Date,
         Bird: req.body.Bird,
         Food: req.body.Food,
         AmountFed: req.body.AmountFed,
@@ -116,7 +116,6 @@ exports.post_feedings_update = function (req, res) {
     }
 
     const updateData = {
-        DateTime: req.body.dateTime,
         Bird: req.body.Bird,
         Food: req.body.Food,
         Amountfed: req.body.AmountFed,
