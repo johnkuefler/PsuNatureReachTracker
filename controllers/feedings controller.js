@@ -37,13 +37,17 @@ exports.export_feedings = async function (req, res) {
     return res.send(csv);
 }
 
-exports.get_feedings_update = function (req, res) {
-    Feeding.findOne({ _id: req.query._id }, function (err, feeding) {
+exports.get_feedings_update = async function (req, res) {
 
+    const birds = await Bird.find({enabled: true});
+    const foods = await Food.find({});
+    const meds = await Medication.find({});
+
+    Feeding.findOne({ _id: req.query._id }, function (err, feedings) {
         if (err) {
             console.log(err);
         } else {
-            res.render('feedings/feedingsupdate', { data: feeding, title: 'Update Feeding' });
+            res.render('feedings/feedingsupdate', { data: feedings, birds: birds, foods: foods, meds: meds, title: 'Update Feeding' });
         }
     });
 }
@@ -58,10 +62,9 @@ exports.get_feedings_create = async function (req, res) {
 }
 
 exports.post_feedings_create = function (req, res) {
-   let today = new Date();
    let currentUser = res.locals.user;
     let newFeedings = new Feeding({
-        Date: today,
+        Date: req.body.Date,
         Bird: req.body.Bird,
         Food: req.body.Food,
         AmountFed: req.body.AmountFed,
@@ -116,6 +119,7 @@ exports.post_feedings_update = function (req, res) {
     }
 
     const updateData = {
+        Date: req.body.Date,
         Bird: req.body.Bird,
         Food: req.body.Food,
         Amountfed: req.body.AmountFed,
@@ -124,7 +128,7 @@ exports.post_feedings_update = function (req, res) {
         GoalWeight: req.body.GoalWeight,
         ActualWeight: req.body.ActualWeight,
         WeatherConditions: req.body.WeatherConditions,
-        Feeder: req.body.Feeder,
+        Feeder: res.locals.user.firstName + ' ' + res.locals.user.lastName,
         Comments: req.body.Comments,
     };
     console.log(updateData);
