@@ -55,7 +55,10 @@
 
     <script type="text/javascript">
     $(document).ready( function () {
-        $('#feedingsTable').DataTable();
+        $('#feedingsTable').DataTable({
+          responsive: true,
+          order: [[0, "desc"]]
+        });
     });
     </script>
   </body>
