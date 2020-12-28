@@ -12,7 +12,8 @@ const feedingsSchema = new Schema({
 	ActualWeight: { type: String, required: true},
 	WeatherConditions: { type: String, required: true},
 	Feeder: { type: String, required: true},
-	Comments: { type: String, required: false},
+	GeneralComments: { type: String, required: false},
+	TrainingComments: { type: String, required: false},
 });
 
 const feedings = mongoose.model('Feeding', feedingsSchema);
