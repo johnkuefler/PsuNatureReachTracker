@@ -74,7 +74,8 @@ exports.post_feedings_create = function (req, res) {
         ActualWeight: req.body.ActualWeight,
         WeatherConditions: req.body.WeatherConditions,
         Feeder: res.locals.user.firstName + ' ' + res.locals.user.lastName,
-        Comments: req.body.Comments
+        GeneralComments: req.body.GeneralComments,
+        TrainingComments: req.body.TrainingComments
     });
     newFeedings.save(function (err) {
         if (err) {
@@ -129,7 +130,8 @@ exports.post_feedings_update = function (req, res) {
         ActualWeight: req.body.ActualWeight,
         WeatherConditions: req.body.WeatherConditions,
         Feeder: res.locals.user.firstName + ' ' + res.locals.user.lastName,
-        Comments: req.body.Comments,
+        GeneralComments: req.body.GeneralComments,
+        TrainingComments: req.body.TrainingComments
     };
     console.log(updateData);
     Feeding.findOneAndUpdate({ _id: req.body.id }, updateData, function (err, data) {
