@@ -2,6 +2,7 @@ const User = require('../models/user');
 var fs = require('fs');
 var path = require('path');
 var multer = require('multer');
+const excel = require('exceljs');
 
 exports.get_users = function (req, res) {
     let currentUser = res.locals.user;
@@ -94,23 +95,35 @@ exports.post_create_user = function (req, res) {
     })
 
 }
-exports.export_users = async function (req, res) {
-    let csv = '';
-    const users = await User.find({});
 
+exports.get_all_export_users = async function(req, res) {
+    const users = await User.find({}).sort({});
+  
+    const workbook = new excel.Workbook();
+    const worksheet = workbook.addWorksheet('Users');
 
-    users.forEach((user) => {
-        csv += user.email + ',' +
-            user.firstName + ',' +
-            user.lastName + ',' +
-            user.registerDate + ',' +
-            user.role + '\r\n'
+    worksheet.columns = [
+        {header: 'Email', key: 'email', width: 15},
+        {header: 'First Name', key: 'firstName', width: 20},
+        {header: 'Last Name', key: 'lastName', width: 16},
+        {header: 'Register Date', key: 'registerDate', width: 16},
+        {header: 'Role', key: 'role', width: 16},
+      ];
+  
+    worksheet.addRows(users);
+  
+    res.setHeader(
+        'Content-Type',
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    );
+    res.setHeader(
+        'Content-Disposition',
+        'attachment; filename=' + 'users.xlsx',
+    );
+    return workbook.xlsx.write(res).then(function() {
+      res.status(200).end();
     });
-    console.log(csv);
-    res.header('Content-Type', 'text/csv');
-    res.attachment('users.csv');
-    return res.send(csv);
-}
+  };
 
 exports.delete_user = function (req, res) {
     User.findOneAndDelete({ _id: req.query._id }, function (err) {

@@ -2,6 +2,7 @@ const Bird = require('../models/bird');
 const Feeding = require('../models/feeding');
 const Medication = require('../models/medication');
 const Food = require('../models/food');
+const excel = require('exceljs');
 
 exports.get_feedings = function (req, res) {
     Feeding.find({}, function (err, feedings) {
@@ -13,29 +14,40 @@ exports.get_feedings = function (req, res) {
     })
 }
 
-exports.export_feedings = async function (req, res) {
-    let csv = '';
-    const feedings = await Feeding.find({});
+exports.get_all_export_feedings = async function(req, res) {
+    const feedings = await Feeding.find({}).sort({Date: 'desc'});
+  
+    const workbook = new excel.Workbook();
+    const worksheet = workbook.addWorksheet('Feedings');
 
-
-    feedings.forEach((feeding) => {
-        csv += feeding.Date + ',' +
-            feeding.Bird + ',' +
-            feeding.Food + ',' +
-            feeding.AmountFed + ',' +
-            feeding.LeftoverFood + ',' +
-            feeding.Medicine + ',' +
-            feeding.GoalWeight + ',' +
-            feeding.ActualWeight + ',' +
-            feeding.WeatherConditions + ',' +
-            feeding.Feeder + ',' +
-            feeding.Comments + '\r\n'
+    worksheet.columns = [
+        {header: 'Date', key: 'Date', width: 15},
+        {header: 'Animal', key: 'Bird', width: 20},
+        {header: 'Food', key: 'Food', width: 16},
+        {header: 'Medicine', key: 'Medicine', width: 20},
+        {header: 'Goal Weight (g)', key: 'GoalWeight', width: 18},
+        {header: 'Actual Weight (g)', key: 'ActualWeight', width: 18},
+        {header: 'Amount Fed (g)', key: 'AmountFed', width: 17},
+        {header: 'Leftover Food (g)', key: 'LeftoverFood', width: 18},
+        {header: 'Weather Conditions', key: 'WeatherConditions', width: 20},
+        {header: 'General Comments', key: 'GeneralComments', width: 50},
+        {header: 'Training Comments', key: 'TrainingComments', width: 50}
+      ];
+  
+    worksheet.addRows(feedings);
+  
+    res.setHeader(
+        'Content-Type',
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    );
+    res.setHeader(
+        'Content-Disposition',
+        'attachment; filename=' + 'feedings.xlsx',
+    );
+    return workbook.xlsx.write(res).then(function() {
+      res.status(200).end();
     });
-
-    res.header('Content-Type', 'text/csv');
-    res.attachment('feedings.csv');
-    return res.send(csv);
-}
+  };
 
 exports.get_feedings_update = async function (req, res) {
 
