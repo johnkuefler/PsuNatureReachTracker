@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html>
 <%- include('../../partials/header', {title: 'Nature Reach - Users'}); %>
-
+<style>
+  #userTable thead{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    font-style: normal;
+    background-color: rgb(92, 184, 92);
+    color: black;
+  }
+</style>
 <body>
   <% include ../../partials/navbar %>
   <br>
-
-  <div class="container">
-    <h1>Users</h1>
-
-    <a href="./users/create" class="btn mb-2 btn-primary">+ Create User</a> <a href="./users/export"class="btn-lg mb-2 btn-success">Export</a>
-
+  <div class="container-fluid">
+    <h1>Users
+      <br>
+    <a href="./users/create" class="btn-lg mb-2 btn-primary">+ Create User</a> <a href="./users/export"class="btn-lg mb-2 btn-success">Export</a>
+    </h1>
+<br>
     <table id="userTable" class="table table-bordered table-striped">
 
       <thead>
@@ -21,7 +30,7 @@
           <td>Last Name</td>
           <td>Register Date</td>
           <td>Role</td>
-          <td>Action</td>
+          <td>Actions</td>
         </tr>
       </thead>
 
