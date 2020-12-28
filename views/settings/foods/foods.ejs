@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <html>
 <%- include('../../partials/header', {title: 'Nature Reach - Foods'}); %>
-
+<style>
+  #foodTable thead{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    font-style: normal;
+    background-color: rgb(92, 184, 92);
+    color: black;
+  }
+</style>
 <body>
   <% include ../../partials/navbar %>
   <br>
@@ -16,7 +25,7 @@
         <tr>
           <td>Food Image</td>
           <td>Name</td>
-          <td>Action</td>
+          <td>Actions</td>
         </tr>
       </thead>
 
