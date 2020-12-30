@@ -64,10 +64,10 @@ router.get('/foods/delete', authMiddleware.ensureAuthenticated, settingsControll
 router.get('/meds/delete', authMiddleware.ensureAuthenticated, settingsController.delete_med);
 
 //Export routers
-router.get('/birds/export', authMiddleware.ensureAuthenticated, settingsController.export_birds);
-router.get('/foods/export', authMiddleware.ensureAuthenticated, settingsController.export_foods);
-router.get('/meds/export', authMiddleware.ensureAuthenticated, settingsController.export_meds);
-router.get('/users/export', authMiddleware.ensureAuthenticated, usersController.export_users);
+router.get('/birds/export', authMiddleware.ensureAuthenticated, settingsController.get_all_export_birds);
+router.get('/foods/export', authMiddleware.ensureAuthenticated, settingsController.get_all_export_foods);
+router.get('/meds/export', authMiddleware.ensureAuthenticated, settingsController.get_all_export_meds);
+router.get('/users/export', authMiddleware.ensureAuthenticated, usersController.get_all_export_users);
 
 
 //User Image Router

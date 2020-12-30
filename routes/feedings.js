@@ -10,6 +10,8 @@ router.post('/create', authMiddleware.ensureAuthenticated, feedingsController.po
 router.get('/update', authMiddleware.ensureAuthenticated, feedingsController.get_feedings_update);
 router.post('/update', authMiddleware.ensureAuthenticated, feedingsController.post_feedings_update);
 router.get('/delete', authMiddleware.ensureAuthenticated, feedingsController.delete_feedings);
-router.get('/export', authMiddleware.ensureAuthenticated, feedingsController.export_feedings);
+router.get('/allexport', authMiddleware.ensureAuthenticated, feedingsController.get_all_export_feedings);
+router.get('/specificexport', authMiddleware.ensureAuthenticated, feedingsController.get_specific_export_feedings);
+router.get('/export', authMiddleware.ensureAuthenticated, feedingsController.get_export_feedings_page);
 
 module.exports = router;

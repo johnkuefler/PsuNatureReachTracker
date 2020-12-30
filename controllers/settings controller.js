@@ -1,6 +1,7 @@
 const Bird = require('../models/bird');
 const Food = require('../models/food');
 const Medication = require('../models/medication');
+const excel = require('exceljs');
 const User = require('../models/user');
 var fs = require('fs');
 var path = require('path');
@@ -311,50 +312,83 @@ exports.delete_med = function (req, res) {
     })
 }
 
-exports.export_birds = async function (req, res) {
-    let csv = '';
-    const birds = await Bird.find({});
-    console.log(birds);
+exports.get_all_export_birds = async function(req, res) {
+    const birds = await Bird.find({}).sort({});
+  
+    const workbook = new excel.Workbook();
+    const worksheet = workbook.addWorksheet('Animals');
 
-    birds.forEach((bird) => {
-        csv += bird.species + ',' +
-            bird.nickName + ',' +
-            bird.nickName + '\r\n'
+    worksheet.columns = [
+        {header: 'Species', key: 'species', width: 15},
+        {header: 'Nickname', key: 'nickName', width: 20},
+        {header: 'Enabled', key: 'enabled', width: 16},
+       
+      ];
+  
+    worksheet.addRows(birds);
+  
+    res.setHeader(
+        'Content-Type',
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    );
+    res.setHeader(
+        'Content-Disposition',
+        'attachment; filename=' + 'animals.xlsx',
+    );
+    return workbook.xlsx.write(res).then(function() {
+      res.status(200).end();
     });
-    console.log(csv);
+  };
 
-    res.header('Content-Type', 'text/csv');
-    res.attachment('birds.csv');
-    return res.send(csv);
-}
+exports.get_all_export_meds = async function(req, res) {
+    const medications = await Medication.find({}).sort({});
+  
+    const workbook = new excel.Workbook();
+    const worksheet = workbook.addWorksheet('Medications');
 
-exports.export_meds = async function (req, res) {
-    let csv = '';
-    const meds = await Medication.find({});
-
-
-    meds.forEach((med) => {
-        csv += med.name + '\r\n'
+    worksheet.columns = [
+        {header: 'Medication Name', key: 'name', width: 17}, 
+      ];
+  
+    worksheet.addRows(medications);
+  
+    res.setHeader(
+        'Content-Type',
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    );
+    res.setHeader(
+        'Content-Disposition',
+        'attachment; filename=' + 'medications.xlsx',
+    );
+    return workbook.xlsx.write(res).then(function() {
+      res.status(200).end();
     });
-    console.log(csv);
-    res.header('Content-Type', 'text/csv');
-    res.attachment('meds.csv');
-    return res.send(csv);
-}
+  };
 
-exports.export_foods = async function (req, res) {
-    let csv = '';
-    const foods = await Food.find({});
+exports.get_all_export_foods = async function(req, res) {
+    const foods = await Food.find({}).sort({});
+  
+    const workbook = new excel.Workbook();
+    const worksheet = workbook.addWorksheet('Foods');
 
-
-    foods.forEach((food) => {
-        csv += food.name + '\r\n'
+    worksheet.columns = [
+        {header: 'Food Name', key: 'name', width: 15},  
+      ];
+  
+    worksheet.addRows(foods);
+  
+    res.setHeader(
+        'Content-Type',
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    );
+    res.setHeader(
+        'Content-Disposition',
+        'attachment; filename=' + 'foods.xlsx',
+    );
+    return workbook.xlsx.write(res).then(function() {
+      res.status(200).end();
     });
-    console.log(csv);
-    res.header('Content-Type', 'text/csv');
-    res.attachment('foods.csv');
-    return res.send(csv);
-}
+  };
 
 //upload food image function
 exports.put_update_food_image = function (req, res) {
