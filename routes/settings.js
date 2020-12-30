@@ -3,12 +3,13 @@ const { use } = require('passport');
 const router = express.Router();
 const settingsController = require('../controllers/settings controller');
 const usersController = require('../controllers/users_controller');
+const instructionsController = require('../controllers/instructionsController');
 const authMiddleware = require('../middleware/ensureAuthenticate');
 const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
 
-
+/* Image Upload */
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, './public/uploads/')
@@ -32,6 +33,9 @@ router.get('/birds', authMiddleware.ensureAuthenticated, settingsController.get_
 router.get('/meds', authMiddleware.ensureAuthenticated, settingsController.get_meds);
 
 router.get('/foods', authMiddleware.ensureAuthenticated, settingsController.get_foods);
+
+router.get('/instructions', authMiddleware.ensureAuthenticated, instructionsController.get_instructions);
+
 
 // Create routers
 
