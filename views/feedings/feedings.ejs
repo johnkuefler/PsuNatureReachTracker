@@ -17,7 +17,7 @@
         <br>
         <h1><%= title %>
           <br>
-          <a href="./feedings/create" class="btn-lg mb-2 btn-primary">+ Add Feeding</a> <% if (locals.user.role === "Admin") { %> <a href="./feedings/export"class="btn-lg mb-2 btn-success">Export</a> <% } %>
+          <a href="./feedings/create" class="btn-lg mb-2 btn-primary">+ Add Feeding</a> <% if (locals.user.role === "Admin") { %> <a href="./feedings/allexport"class="btn-lg mb-2 btn-success">Export All Feedings</a> <a href="./feedings/export" class="btn-lg mb-2 btn-success">Export Specific Feedings</a><% } %>
         </h1>
         <br>
      <table id="feedingsTable" class="table table-bordered table-striped table-responsive">
