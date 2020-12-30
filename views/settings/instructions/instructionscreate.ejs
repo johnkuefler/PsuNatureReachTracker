@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<%- include('../../partials/header', {title: 'Nature Reach - Create Instruction'}); %>
+
+<body>
+    <% include ../../partials/navbar %>
+    <div class="container">
+        <br>
+        <h1><%= title %></h1>
+        <p>Create a new instruction to show to the users</p>
+        <div class="container-fluid" style="width: 18rem;">
+            <form method ="POST" action="/settings/instructions/create">
+                <div class="form-group" col-4>
+                    <input required type="text" class="form-control" placeholder="Comment" name="Comment">
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <% include ../../partials/scripts %>
+</body>
+
+</html>

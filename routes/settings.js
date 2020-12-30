@@ -3,12 +3,13 @@ const { use } = require('passport');
 const router = express.Router();
 const settingsController = require('../controllers/settings controller');
 const usersController = require('../controllers/users_controller');
+const instructionsController = require('../controllers/instructionsController');
 const authMiddleware = require('../middleware/ensureAuthenticate');
 const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
 
-
+/* Image Upload */
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, './public/uploads/')
@@ -33,6 +34,9 @@ router.get('/meds', authMiddleware.ensureAuthenticated, settingsController.get_m
 
 router.get('/foods', authMiddleware.ensureAuthenticated, settingsController.get_foods);
 
+ router.get('/instructions', authMiddleware.ensureAuthenticated, instructionsController.get_instructions);
+
+
 // Create routers
 
 router.get('/birds/create', authMiddleware.ensureAuthenticated, settingsController.get_create_bird);
@@ -41,6 +45,8 @@ router.get('/foods/create', authMiddleware.ensureAuthenticated, settingsControll
 router.post('/foods/create', authMiddleware.ensureAuthenticated, settingsController.post_create_food);
 router.get('/meds/create', authMiddleware.ensureAuthenticated, settingsController.get_create_medication);
 router.post('/meds/create', authMiddleware.ensureAuthenticated, settingsController.post_create_med);
+router.get('/instructions/create', authMiddleware.ensureAuthenticated, instructionsController.get_create_instruction);
+router.post('/instructions/create', authMiddleware.ensureAuthenticated, instructionsController.post_create_instruction);
 
 // Users routes
 router.get('/users', authMiddleware.ensureAuthenticated, usersController.get_users);
@@ -57,17 +63,21 @@ router.get('/meds/update', authMiddleware.ensureAuthenticated, settingsControlle
 router.post('/birds/update', authMiddleware.ensureAuthenticated, settingsController.post_birds_update);
 router.post('/foods/update', authMiddleware.ensureAuthenticated, settingsController.post_foods_update);
 router.post('/meds/update', authMiddleware.ensureAuthenticated, settingsController.post_meds_update);
+router.get('/instructions/update', authMiddleware.ensureAuthenticated, instructionsController.get_instruction_update);
+router.post('/instructions/update', authMiddleware.ensureAuthenticated, instructionsController.post_instruction_update);
 
 // Delete routers
 router.get('/birds/delete', authMiddleware.ensureAuthenticated, settingsController.delete_bird);
 router.get('/foods/delete', authMiddleware.ensureAuthenticated, settingsController.delete_food);
 router.get('/meds/delete', authMiddleware.ensureAuthenticated, settingsController.delete_med);
+router.get('/instructions/delete', authMiddleware.ensureAuthenticated, instructionsController.delete_instruction);
 
 //Export routers
 router.get('/birds/export', authMiddleware.ensureAuthenticated, settingsController.get_all_export_birds);
 router.get('/foods/export', authMiddleware.ensureAuthenticated, settingsController.get_all_export_foods);
 router.get('/meds/export', authMiddleware.ensureAuthenticated, settingsController.get_all_export_meds);
 router.get('/users/export', authMiddleware.ensureAuthenticated, usersController.get_all_export_users);
+router.get('/instructions/export', authMiddleware.ensureAuthenticated, instructionsController.get_all_export_instructions);
 
 
 //User Image Router

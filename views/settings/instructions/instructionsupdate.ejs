@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<%- include('../../partials/header', {title: 'Nature Reach - Edit Instruction'}); %>
+
+<body>
+    <% include ../../partials/navbar %>
+    <div class="container">
+        <br>
+        <h1><%= title %></h1>
+        <p>Edit an instruction in the database</p>
+        <form method="POST" action="/settings/instructions/update">
+            <input type="hidden" name="id" value="<%= data._id  %>"/>
+            <div class="container-fluid" style="width: 18rem;">
+                <div class="form-group" col-4>
+                    <label>Instruction</label>
+                    <input type="text" class="form-control" placeholder="Comment" name="Comment" value="<%= data.Comment  %>">
+                </div>
+                    <button type="submit" class="btn mt-1 btn-primary">Submit</button>
+                
+
+            </div>
+        </form>
+    </div>
+    <% include ../../partials/scripts %>
+</body>
+
+</html>
