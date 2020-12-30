@@ -2,9 +2,12 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const instructionSchema = new Schema({
-    comment: { 
+    Comment: { 
         type: String, 
         required: true
+    },
+    Admin: { 
+        type: String, required: true
     },
   },
 );
