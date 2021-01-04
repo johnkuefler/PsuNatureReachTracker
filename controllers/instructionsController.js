@@ -2,8 +2,6 @@ const Instruction = require('../models/instruction');
 const excel = require('exceljs');
 
 exports.get_instructions = function (req, res) {
-    
-   
         Instruction.find({}, function (err, instructions) {
             if (err) {
                 console.error(err);
@@ -24,9 +22,14 @@ exports.get_create_instruction = function (req, res) {
 }
 
 exports.post_create_instruction = function (req, res) {
-    
+    let Enabled = false;
+    if (req.body.Enabled == 'on') {
+        Enabled = true;
+    }
+
     let newInstruction = new Instruction({
         Comment: req.body.Comment,
+        Enabled: Enabled,
         Admin: res.locals.user.firstName + ' ' + res.locals.user.lastName,
     });
     
@@ -60,14 +63,17 @@ exports.get_instruction_update = function (req, res) {
 }
 
 exports.post_instruction_update = function (req, res) {
-
+    let Enabled = false;
+    if (req.body.Enabled == 'on') {
+        Enabled = true;
+    }
     const updateInstruction = {
         Comment: req.body.Comment,
+        Enabled: Enabled,
         Admin: res.locals.user.firstName + ' ' + res.locals.user.lastName,
     };
     
         console.log(updateInstruction);
-  
 
     Instruction.findOneAndUpdate({ _id: req.body.id }, updateInstruction, function (err, data) {
         if (err) {

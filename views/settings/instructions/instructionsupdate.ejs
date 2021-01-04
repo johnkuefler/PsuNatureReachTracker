@@ -15,6 +15,14 @@
                     <label>Instruction</label>
                     <input type="text" class="form-control" placeholder="Comment" name="Comment" value="<%= data.Comment  %>">
                 </div>
+                <div class="form-check" col-4>
+                    <% if (data.Enabled) { %>
+                        <input type="checkbox" class="form-check-input" id="Enabled" name="Enabled" checked />
+                      <% } else { %>
+                        <input type="checkbox" class="form-check-input" id="Enabled" name="Enabled" />
+                      <% } %>
+                    <label class="form-check-label">Enabled</label>
+                </div>
                     <button type="submit" class="btn mt-1 btn-primary">Submit</button>
                 
 

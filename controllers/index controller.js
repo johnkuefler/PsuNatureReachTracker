@@ -1,13 +1,15 @@
+const Instruction = require('../models/instruction');
 const User = require('../models/user');
 
 exports.get_index = function (req, res) {
-
-    if (res.locals.user.passwordIsExpired) {
-        res.redirect('/reset');
-
-    } else {
-        res.render('index', { title: 'Express' });
-    }
+    Instruction.find({}, function (err, instructions) {
+        if (res.locals.user.passwordIsExpired) {
+            res.redirect('/reset');
+        } else {
+            console.log("this works");
+            res.render('index', { data: instructions});
+        }
+    })
 }
 
 exports.get_reset = function (req, res) {
