@@ -28,6 +28,7 @@
             <thead>
               <tr>
                 <td>Comment</td>
+                <td>Enabled</td>
                 <td>Admin</td>
                 <td>Actions</td>
             </tr>
@@ -36,6 +37,7 @@
             <% for(var i=0; i < data.length; i++) { %>
             <tr>
             <td><%=data[i].Comment%></td>
+            <td><%=data[i].Enabled%></td>
             <td><%=data[i].Admin%></td>
                 <td>
                     <a href="./instructions/update?_id=<%= data[i]._id %>"><span style="font-size: 20px;"><i class="fa fa-pencil"></i></span></a> 
@@ -51,7 +53,10 @@
 
   <script type="text/javascript">
     $(document).ready(function () {
-      $('#instructionTable').DataTable();
+      $('#instructionTable').DataTable({
+        responsive: true,
+        order: [[1, "desc"]]
+      });
     });
   </script>
 

@@ -9,6 +9,10 @@ const instructionSchema = new Schema({
     Admin: { 
         type: String, required: true
     },
+    Enabled: { 
+        type: Boolean, 
+        required: true
+    },
   },
 );
 
