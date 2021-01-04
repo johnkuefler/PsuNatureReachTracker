@@ -1,69 +1,88 @@
 <!DOCTYPE html>
 <html>
-<%- include('../../partials/header', {title: 'Nature Reach - Animals'}); %>
-<style>
-  #birdTable thead{
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    font-style: normal;
-    background-color: rgb(92, 184, 92);
-    color: black;
-  }
-</style>
-<body>
-  <% include ../../partials/navbar %>
-  <br>
+<%- include('../../partials/header', {title: 'Nature Reach - Animals' }); %>
+  <style>
+    #birdTable thead {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      font-style: normal;
+      background-color: rgb(92, 184, 92);
+      color: black;
+    }
 
-  <div class="container">
-    <h1>Animals</h1>
+    .responsive {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      object-position: top;
+    }
+  </style>
 
-    <a href="./birds/create" class="btn mb-2 btn-primary">+ Create Animal</a> <a href="./birds/export"class="btn-lg mb-2 btn-success">Export</a>
+  <body>
+    <% include ../../partials/navbar %>
+      <br>
 
-    <table id="birdTable" class="table table-bordered table-striped">
+      <div class="container">
+        <h1>Animals</h1>
 
-      <thead>
-        <tr>
-          <td>Animal Image</td>
-          <td>Species</td>
-          <td>Nickname</td>
-          <td>Enabled</td>
-          <td>Actions</td>
-        </tr>
-      </thead>
+        <div class="my-3"><a href="./birds/create" class="btn-lg mb-2 btn-primary">+ Create Animal</a> <a
+            href="./birds/export" class="btn-lg mb-2 btn-success">Export</a></div>
 
-      <% for(var i=0; i < data.length; i++) { %>
-      <tr>
-        <td>
-          <% if (data[i].animalImage.data == "") {%>
-            <img style="width:200px;height:200px;" src="../images/defaultanimalpic.png">
-            </>
-            <% } else { %>
-                <img style="width:200px;height:200px;" src="data:image/<%= data[i].animalImage.contentType%>;base64,
+
+        <table id="birdTable" class="table table-bordered table-striped table-responsive">
+
+          <thead>
+            <tr>
+              <td>Animal Image</td>
+              <td>Species</td>
+              <td>Nickname</td>
+              <td>Enabled</td>
+              <td>Actions</td>
+            </tr>
+          </thead>
+
+          <% for(var i=0; i < data.length; i++) { %>
+            <tr>
+              <td>
+                <% if (data[i].animalImage.data=="" ) {%>
+                  <img class="responsive" src="../images/defaultanimalpic.png">
+                  </>
+                  <% } else { %>
+                    <img class="responsive" src="data:image/<%= data[i].animalImage.contentType%>;base64,
                 <%= data[i].animalImage.data.toString('base64')%>">
+                    <% } %>
+              </td>
+              <td>
+                <%=data[i].species%>
+              </td>
+              <td>
+                <%=data[i].nickName%>
+              </td>
+              <td>
+                <%=data[i].enabled%>
+              </td>
+              <td><a href="./birds/update?_id=<%= data[i]._id %>"><span style="font-size: 20px;"><i
+                      class="fa fa-pencil"></i></span></a> |
+                <a href="./birds/updateanimalimage?_id=<%= data[i]._id %>"><span style="font-size: 20px;"><i
+                      class="fa fa-image"></i></span></a> | <a href="./birds/delete?_id=<%= data[i]._id %>"
+                  onclick="return confirm('Are you sure you want to delete this?')"><span style="font-size: 20px;"><i
+                      class="fa fa-trash"></i></span></a>
+              </td>
+            </tr>
             <% } %>
-        </td>
-        <td><%=data[i].species%></td>
-        <td><%=data[i].nickName%></td>
-        <td><%=data[i].enabled%></td>
-        <td><a href="./birds/update?_id=<%= data[i]._id %>"><span style="font-size: 20px;"><i class="fa fa-pencil"></i></span></a> | 
-          <a href="./birds/updateanimalimage?_id=<%= data[i]._id %>"><span style="font-size: 20px;"><i class="fa fa-image"></i></span></a> | <a href="./birds/delete?_id=<%= data[i]._id %>"
-          onclick="return confirm('Are you sure you want to delete this?')"><span style="font-size: 20px;"><i class="fa fa-trash"></i></span></a> 
-        </td>
-      </tr>
-      <% } %>
-    </table>
-  </div>
+        </table>
+      </div>
 
-  <% include ../../partials/scripts %>
+      <% include ../../partials/scripts %>
 
-  <script type="text/javascript">
-    $(document).ready(function () {
-      $('#birdTable').DataTable({
-        responsive: true,
-      });
-    });
-  </script>
-</body>
+        <script type="text/javascript">
+          $(document).ready(function () {
+            $('#birdTable').DataTable({
+              responsive: true,
+            });
+          });
+        </script>
+  </body>
 
 </html>

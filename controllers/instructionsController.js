@@ -6,7 +6,7 @@ exports.get_instructions = function (req, res) {
             if (err) {
                 console.error(err);
             } else {
-                res.render('settings/instructions/instructions', { data: instructions });
+                res.render('settings/instructions/instructions', { data: instructions, title: 'Instructions' });
             }
         })
     }
