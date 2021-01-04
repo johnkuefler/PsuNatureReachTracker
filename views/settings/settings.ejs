@@ -1,71 +1,84 @@
 <!DOCTYPE html>
 <html>
-  <%- include('../partials/header', {title: 'Nature Reach - Settings'}); %>
+<%- include('../partials/header', {title: 'Nature Reach - Settings' }); %>
   <style>
-    body {
+    .backgroundOwlPicture {
       background-image: url('../../public/images/owl2.jpg');
       background-repeat: no-repeat;
       background-attachment: fixed;
       background-size: cover;
+      background-position: center top;
+      position: relative;
+      width: 100vw;
+      height: 100vh;
     }
+
     .card {
-opacity: 0.7;
+      opacity: 0.7;
     }
 
     .card:hover {
-opacity: 1.0;
+      opacity: 1.0;
     }
-    </style>
-  <body>    
+  </style>
+
+  <body>
     <%- include ../partials/navbar %>
+      <div class="backgroundOwlPicture">
+        <br>
 
-    <br>    
+        <div class="container">
+          <h1>Settings</h1>
 
-    <div class="container">
-      <h1>Settings</h1>
+          <br>
 
-      <br>
+          <div class="card-group">
+            <div class="card" style="width: 18rem;">
+              <div class="card-header font-weight-bold"><img
+                  src="https://img.icons8.com/ios-filled/50/000000/top-view-bird.png" /> Animals</div>
+              <div class="card-body">
+                <p class="card-text">Add, update, or remove animals</p>
+                <a href="settings/birds" class="btn btn-primary">Go to animals</a>
+              </div>
+            </div>
 
-      <div class="card-group">
-      <div class="card" style="width: 18rem;">
-        <div class="card-header font-weight-bold"><img src="https://img.icons8.com/ios-filled/50/000000/top-view-bird.png"/>  Animals</div>
-        <div class="card-body">
-          <p class="card-text">Add, update, or remove animals</p>
-          <a href="settings/birds" class="btn btn-primary">Go to animals</a>          
-        </div>
-        </div>
+            <div class="card" style="width: 18rem;">
+              <div class="card-header font-weight-bold"><img
+                  src="https://img.icons8.com/ios-filled/50/000000/prescription-pill-bottle.png" /> Meds</div>
+              <div class="card-body">
+                <p class="card-text">Add, update, or remove meds</p>
+                <a href="settings/meds" class="btn btn-primary">Go to meds</a>
+              </div>
+            </div>
 
-      <div class="card" style="width: 18rem;">        
-        <div class="card-header font-weight-bold"><img src="https://img.icons8.com/ios-filled/50/000000/prescription-pill-bottle.png"/>  Meds</div>
-        <div class="card-body">
-          <p class="card-text">Add, update, or remove meds</p>
-          <a href="settings/meds" class="btn btn-primary">Go to meds</a>
+            <div class="card" style="width: 18rem;">
+              <div class="card-header font-weight-bold"><img
+                  src="https://img.icons8.com/ios-filled/50/000000/rack-of-lamb.png" /> Foods</div>
+              <div class="card-body">
+                <p class="card-text">Add, update, or remove foods</p>
+                <a href="settings/foods" class="btn btn-primary">Go to foods</a>
+              </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+              <div class="card-header font-weight-bold"><img
+                  src="https://img.icons8.com/ios-filled/50/000000/question-mark.png" /> Instructions</div>
+              <div class="card-body">
+                <p class="card-text">Add, update, or remove instructions</p>
+                <a href="settings/instructions" class="btn btn-primary">Go to instructions</a>
+              </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+              <div class="card-header font-weight-bold"><img
+                  src="https://img.icons8.com/metro/50/000000/gender-neutral-user.png" /> Users</div>
+              <div class="card-body">
+                <p class="card-text">Add, update, or remove users</p>
+                <a href="settings/users" class="btn btn-primary">Go to users</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div class="card" style="width: 18rem;">
-        <div class="card-header font-weight-bold"><img src="https://img.icons8.com/ios-filled/50/000000/rack-of-lamb.png"/>  Foods</div>
-        <div class="card-body">
-          <p class="card-text">Add, update, or remove foods</p>
-          <a href="settings/foods" class="btn btn-primary">Go to foods</a>
-        </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-          <div class="card-header font-weight-bold"><img src="https://img.icons8.com/ios-filled/50/000000/question-mark.png"/> Instructions</div>
-          <div class="card-body">
-            <p class="card-text">Add, update, or remove special instructions</p>
-            <a href="settings/instructions" class="btn btn-primary">Go to instructions</a>
-          </div>
-          </div>
-        <div class="card" style="width: 18rem;">
-          <div class="card-header font-weight-bold"><img src="https://img.icons8.com/metro/50/000000/gender-neutral-user.png"/>  Users</div>
-          <div class="card-body">
-            <p class="card-text">Add, update, or remove users</p>
-            <a href="settings/users" class="btn btn-primary">Go to users</a>
-          </div>
-          </div>
-      </div>
-    </div>
-    <%- include ../partials/scripts %>
+      <%- include ../partials/scripts %>
   </body>
+
 </html>

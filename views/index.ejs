@@ -2,14 +2,15 @@
 <html>
 <%- include('./partials/header', {title: 'Nature Reach - Home Page' }); %>
   <style>
-    body {
+    .backgroundOwlPicture {
       background-image: url('../public/images/owl2.jpg');
       background-repeat: no-repeat;
       background-attachment: fixed;
       background-size: cover;
+      background-position: center top;
       position: relative;
       width: 100vw;
-      height: 10vh;
+      height: 100vh;
     }
 
     .card {
@@ -24,16 +25,18 @@
   <body>
     <% include ./partials/navbar %>
 
-      <% for(var i=0; i < data.length; i++) { %>
-        <% if (data[i].Enabled) { %>
-          <div class="alert alert-warning rounded-pill" role="alert">
-            <%=data[i].Comment%>
-              <a class="close" data-dismiss="alert" href="#">&times;</a>
-          </div>
-          <% } %>
-            <% } %>
+      <div class="backgroundOwlPicture">
 
-              <div>
+        <% for(var i=0; i < data.length; i++) { %>
+          <% if (data[i].Enabled) { %>
+            <div class="alert alert-warning rounded-pill" role="alert">
+              <%=data[i].Comment%>
+                <a class="close" data-dismiss="alert" href="#">&times;</a>
+            </div>
+            <% } %>
+              <% } %>
+
+
                 <div class="container-fluid">
                   <br>
 
@@ -61,24 +64,10 @@
                         </div>
                       </div>
                     </div>
-                    <!-- <div class="row row-cols-2 row-cols-md-2">
-    <div class="col mb-4">
-      <div class="card h-100">
-        <div class="card-body d-flex flex-column">
-          <h5 class="card-title">Recent Instructions</h5>
-          <p class="card-text">View details about recent instructions.</p>
-          <a href="./settings/instructions" class="btn mt-auto btn-primary">View</a>
-        </div>
-      </div> -->
                   </div>
                 </div>
-
-              </div>
-              </div>
-
-              <% include ./partials/scripts %>
-                </div>
-                </div>
+      </div>
+      <% include ./partials/scripts %>
   </body>
 
 </html>
