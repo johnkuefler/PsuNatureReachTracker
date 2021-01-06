@@ -20,11 +20,11 @@
 
         <h1><%= title %></h1>
 
-        <div class="my-3"><a href="./instructions/create" class="btn-lg mb-2 btn-primary">+ Create Instruction</a></div>
-        <div class="my-3"><a href="./instructions/export" class="btn-lg mb-2 btn-success">Export</a></div>
+        <div class="my-3"><a href="./instructions/create" class="btn-lg mb-2 btn-primary">+ Create Instruction</a> <a href="./instructions/export" class="btn-lg mb-2 btn-success">Export</a></div>
+        
 
-
-        <table id="instructionTable" class="table table-bordered table-striped table-responsive">
+<div class="table-responsive">
+        <table id="instructionTable" class="table table-bordered table-striped" width="100%">
           <thead>
             <tr>
               <td>Comment</td>
@@ -55,6 +55,7 @@
             </tr>
             <% } %>
         </table>
+      </div>
       </div>
 
       <% include ../../partials/scripts %>

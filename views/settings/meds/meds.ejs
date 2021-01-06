@@ -10,18 +10,28 @@
     background-color: rgb(92, 184, 92);
     color: black;
   }
+
+  .responsive {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      object-position: top;
+    }
 </style>
+
 <body>
   <% include ../../partials/navbar %>
   <br>
 
   <div class="container-fluid">
-    <div class="container">
+   
       <h1>Medications</h1>
 
-      <a href="./meds/create" class="btn mb-2 btn-primary">+ Create Medication</a> <a href="./meds/export"class="btn-lg mb-2 btn-success">Export</a>
+      <div class="my-3"><a href="./meds/create" class="btn-lg mb-2 btn-primary">+ Create Medication</a> <a href="./meds/export"class="btn-lg mb-2 btn-success">Export</a></div> 
+      
 
-      <table id="medsTable" class="table table-bordered table-striped">
+      <div class="table-responsive">
+      <table id="medsTable" class="table table-bordered table-striped" width="100%">
 
         <thead>
           <tr>
@@ -35,10 +45,10 @@
         <tr>
           <td>
             <% if (data[i].medicationImage.data == "") {%>
-              <img style="width:200px;height:200px;" src="../images/defaultmedicationpic.png">
+              <img class="responsive" src="../images/defaultmedicationpic.png">
               </>
               <% } else { %>
-                  <img style="width:200px;height:200px;" src="data:image/<%= data[i].medicationImage.contentType%>;base64,
+                  <img class="responsive" src="data:image/<%= data[i].medicationImage.contentType%>;base64,
                   <%= data[i].medicationImage.data.toString('base64')%>">
               <% } %>
           </td>
@@ -53,12 +63,15 @@
         <% } %>
       </table>
     </div>
+    </div>
 
     <% include ../../partials/scripts %>
 
     <script type="text/javascript">
       $(document).ready(function () {
-        $('#medsTable').DataTable();
+        $('#medsTable').DataTable({
+          responsive: true,
+        });
       });
     </script>
 </body>
