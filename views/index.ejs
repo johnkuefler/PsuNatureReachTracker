@@ -13,12 +13,25 @@
       height: 100vh;
     }
 
+    html {
+      background: url('../public/images/owl2.jpg') no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+
     .card {
       opacity: 0.7;
     }
 
     .card:hover {
       opacity: 1.0;
+    }
+
+    .col {
+      display: flex;
+      flex-wrap: wrap;
     }
   </style>
 
@@ -44,9 +57,11 @@
                     <h1 style="color:darkslategray">Welcome!</h1>
                     <br>
                     <h5 style="color:darkslategray">Quick Menu:</h5>
-                    <div class="row row-cols-1 row-cols-md-2">
+
+
+                    <div class="col mb-4">
                       <div class="col mb-4">
-                        <div class="card h-100">
+                        <div class="card h-100" style="width: 100%">
                           <div class="card-body d-flex flex-column">
                             <h5 class="card-title">Recent Feedings</h5>
                             <p class="card-text">View details about recent feedings.</p>
@@ -54,8 +69,9 @@
                           </div>
                         </div>
                       </div>
+
                       <div class="col mb-4">
-                        <div class="card h-100">
+                        <div class="card h-100" style="width: 100%">
                           <div class="card-body d-flex flex-column">
                             <h5 class="card-title">Add New Feeding</h5>
                             <p class="card-text">Record a new feeding in the database.</p>
@@ -63,6 +79,8 @@
                           </div>
                         </div>
                       </div>
+
+
                     </div>
                   </div>
                 </div>

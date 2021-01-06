@@ -10,17 +10,27 @@
     background-color: rgb(92, 184, 92);
     color: black;
   }
+
+  .responsive {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      object-position: top;
+    }
+
 </style>
 <body>
   <% include ../../partials/navbar %>
   <br>
+  
   <div class="container-fluid">
-    <h1>Users
-      <br>
-    <a href="./users/create" class="btn-lg mb-2 btn-primary">+ Create User</a> <a href="./users/export"class="btn-lg mb-2 btn-success">Export</a>
-    </h1>
-<br>
-    <table id="userTable" class="table table-bordered table-striped">
+    
+    <h1>Users</h1>
+    
+    <div class="my-3"><a href="./users/create" class="btn-lg mb-2 btn-primary">+ Create User</a> <a href="./users/export"class="btn-lg mb-2 btn-success">Export</a></div>
+
+    <div class="table-responsive">
+    <table id="userTable" class="table table-bordered table-striped" width="100%">
 
       <thead>
         <tr>
@@ -38,10 +48,10 @@
       <tr>
         <td>
           <% if (data[i].profileImage.data == "") {%>
-            <img style="width:100px;height:100px;" src="../images/defaultuserprofilepic.png">
+            <img class="responsive" src="../images/defaultuserprofilepic.png">
             </>
             <% } else { %>
-                <img style="width:100px;height:100px;" src="data:image/<%= data[i].profileImage.contentType%>;base64,
+                <img class="responsive" src="data:image/<%= data[i].profileImage.contentType%>;base64,
                 <%= data[i].profileImage.data.toString('base64')%>">
             <% } %>
         </td>
@@ -58,6 +68,7 @@
       </tr>
       <% } %>
     </table>
+  </div>
   </div>
 
   <% include ../../partials/scripts %>

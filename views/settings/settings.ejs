@@ -5,12 +5,20 @@
     .backgroundOwlPicture {
       background-image: url('../../public/images/owl2.jpg');
       background-repeat: no-repeat;
-      background-attachment: local;
+      background-attachment: fixed;
       background-size: cover;
-      background-position: center top;
+      background-position: 50%0;
       position: relative;
       width: 100vw;
       height: 100vh;
+    }
+
+    html {
+      background: url('../../public/images/owl2.jpg') no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
     }
 
     .card {
@@ -32,8 +40,9 @@
 
           <br>
 
-          <div class="card-group">
-            <div class="card" style="width: 18rem;">
+          <div class="card-columns">
+
+            <div class="card" style="width: 100%">
               <div class="card-header font-weight-bold"><img
                   src="https://img.icons8.com/ios-filled/50/000000/top-view-bird.png" /> Animals</div>
               <div class="card-body">
@@ -42,7 +51,7 @@
               </div>
             </div>
 
-            <div class="card" style="width: 18rem;">
+            <div class="card" style="width: 100%">
               <div class="card-header font-weight-bold"><img
                   src="https://img.icons8.com/ios-filled/50/000000/prescription-pill-bottle.png" /> Meds</div>
               <div class="card-body">
@@ -51,7 +60,7 @@
               </div>
             </div>
 
-            <div class="card" style="width: 18rem;">
+            <div class="card" style="width: 100%">
               <div class="card-header font-weight-bold"><img
                   src="https://img.icons8.com/ios-filled/50/000000/rack-of-lamb.png" /> Foods</div>
               <div class="card-body">
@@ -59,7 +68,7 @@
                 <a href="settings/foods" class="btn btn-primary">Go to foods</a>
               </div>
             </div>
-            <div class="card" style="width: 18rem;">
+            <div class="card" style="width: 100%">
               <div class="card-header font-weight-bold"><img
                   src="https://img.icons8.com/ios-filled/50/000000/question-mark.png" /> Instructions</div>
               <div class="card-body">
@@ -67,7 +76,7 @@
                 <a href="settings/instructions" class="btn btn-primary">Go to instructions</a>
               </div>
             </div>
-            <div class="card" style="width: 18rem;">
+            <div class="card" style="width: 100%">
               <div class="card-header font-weight-bold"><img
                   src="https://img.icons8.com/metro/50/000000/gender-neutral-user.png" /> Users</div>
               <div class="card-body">
@@ -79,6 +88,7 @@
         </div>
       </div>
       <%- include ../partials/scripts %>
+
   </body>
 
 </html>
