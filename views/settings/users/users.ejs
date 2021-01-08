@@ -11,7 +11,7 @@
     color: black;
   }
 
-  .responsive {
+  .responsiveuser {
       width: 100px;
       height: 100px;
       object-fit: cover;
@@ -48,10 +48,10 @@
       <tr>
         <td>
           <% if (data[i].profileImage.data == "") {%>
-            <img class="responsive" src="../images/defaultuserprofilepic.png">
+            <img class="responsiveuser" src="../images/defaultuserprofilepic.png">
             </>
             <% } else { %>
-                <img class="responsive" src="data:image/<%= data[i].profileImage.contentType%>;base64,
+                <img class="responsiveuser" src="data:image/<%= data[i].profileImage.contentType%>;base64,
                 <%= data[i].profileImage.data.toString('base64')%>">
             <% } %>
         </td>

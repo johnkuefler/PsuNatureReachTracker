@@ -5,7 +5,7 @@
     max-width: 100%;
     height: auto;
   }
-</style> 
+</style>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="/">
@@ -22,8 +22,8 @@
             class="sr-only"></span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/feedings"><img
-            src="https://img.icons8.com/ultraviolet/40/000000/meal.png" /> Feedings<span class="sr-only"></span></a>
+        <a class="nav-link" href="/feedings"><img src="https://img.icons8.com/ultraviolet/40/000000/meal.png" />
+          Feedings<span class="sr-only"></span></a>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
@@ -33,14 +33,13 @@
             Settings</a>
         </li>
         <% } %>
-
           <li class="nav-item">
             <div class="btn-group">
               <% if (locals.user.profileImage=="" ) {%>
                 <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                   aria-expanded="false">
                   <img src="../images/defaultuserprofilepic.png">
-                  <%=  ' ' + locals.user.firstName + ' ' + locals.user.lastName %>
+                  <%= ' ' + locals.user.firstName + ' ' + locals.user.lastName %>
                 </button>
                 </>
                 <% } else { %>
@@ -49,7 +48,7 @@
                     <img style="width:40px;height:40px;" class="rounded-circle article-img"
                       src="data:image/<%= locals.user.profileImage.contentType%>; base64,<%= locals.user.profileImage.data.toString('base64')%>"
                       id="img">
-                    <%=  ' ' + locals.user.firstName + ' ' + locals.user.lastName %>
+                    <%= ' ' + locals.user.firstName + ' ' + locals.user.lastName %>
                   </button>
                   <% } %>
 
@@ -60,7 +59,6 @@
                     </div>
             </div>
           </li>
-
     </ul>
   </div>
 </nav>

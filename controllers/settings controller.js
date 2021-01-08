@@ -42,7 +42,7 @@ exports.get_create_food = function (req, res) {
 exports.get_create_medication = function (req, res) {
     let currentUser = res.locals.user;
     if (currentUser.role === "Admin") {
-        res.render('settings/meds/medscreate', { title: 'Create Meds' });
+        res.render('settings/meds/medscreate', { title: 'Create Medication' });
     } else {
         res.render('error');
         console.log('You do not have permission to this page.')
