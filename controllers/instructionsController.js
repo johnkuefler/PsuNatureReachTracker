@@ -6,7 +6,7 @@ exports.get_instructions = function (req, res) {
             if (err) {
                 console.error(err);
             } else {
-                res.render('settings/instructions/instructions', { data: instructions });
+                res.render('settings/instructions/instructions', { data: instructions, title: 'Instructions' });
             }
         })
     }
@@ -53,7 +53,7 @@ exports.get_instruction_update = function (req, res) {
             if (err) {
                 console.log(err);
             } else {
-                res.render('settings/instructions/instructionsupdate', { data: instruction, title: 'Edit Instruction' });
+                res.render('settings/instructions/instructionsupdate', { data: instruction, title: 'Update Instruction' });
             }
         });
     } else {

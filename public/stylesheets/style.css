@@ -8,7 +8,7 @@ login {
   background-image: linear-gradient(147deg, #FFE53B 0%, #FF2525 74%);
 }
 
-.card{
+.card {
   max-width: 500px;
   width: 75%;
   min-width: 25%;
@@ -17,6 +17,31 @@ login {
   text-align: center;
   position: absolute;
   right: 12%;
+}
+
+.responsive {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  object-position: top;
+}
+
+.responsiveuser {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  object-position: top;
+}
+
+.backgroundOwlPicture {
+  background-image: url('../public/images/owl2.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: 50%0%;
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
 }
 
 
