@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html>
-<%- include('../../partials/header', {title: 'Nature Reach - Edit Medication'}); %>
+<%- include('../../partials/header', {title: 'Nature Reach - Update Medication'}); %>
 
 <body>
     <% include ../../partials/navbar %>
     <div class="container">
         <br>
-        <h1><%= title %></h1>
-        <p>Update a medication in the database</p>
+        <h1 class="ml-3"><%= title %></h1>
+        <p class="ml-3">Update a medication in the database</p>
         <form method="POST" action="/settings/meds/update">
             <input type="hidden" name="id" value="<%= data._id  %>"/>
-            <div class="container-fluid" style="width: 18rem;">
-                <div class="form-group" col-4>
-                    <label>Medication Name</label>
+
+           
+                <div class="form-group col-md-4 col-sm-12">
+                    <label>Name of Medication</label>
                     <input type="text" class="form-control" placeholder="Name of medication" name="name" value="<%= data.name  %>">
                 </div>
                 
-                    <button type="submit" class="btn mt-1 btn-primary">Submit</button>
+                <div class="form-group col-md-4 col-sm-12">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                    
                 
-            </div>
+            
         </form>
     </div>
     <% include ../../partials/scripts %>

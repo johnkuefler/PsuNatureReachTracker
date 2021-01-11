@@ -11,8 +11,9 @@
         <form method="POST" action="/feedings/create">
 
                 <div class="form-group col-md-4 col-sm-12">
+                    <label>Animal</label>
                     <select required class="form-control" name="Bird">
-                        <option value="" disabled selected>Animal</option>
+                        <option value="" disabled selected></option>
                         <% for(var i=0; i<birds.length; i++) { %>
                         <option value="<%=birds[i].nickName%> - <%=birds[i].species%>">
                             <%=birds[i].nickName%> - <%=birds[i].species%>
@@ -22,8 +23,9 @@
                 </div>
 
                 <div class="form-group col-md-4 col-sm-12">
+                    <label>Food</label>
                     <select required class="form-control" name="Food">
-                        <option value="" disabled selected>Food</option>
+                        <option value="" disabled selected></option>
                         <% for(var i=0; i<foods.length; i++) { %>
                         <option value="<%=foods[i].name%>">
                             <%=foods[i].name%>
@@ -33,16 +35,19 @@
                 </div>
 
                 <div class="form-group col-md-4 col-sm-12">
-                    <input required type="text" class="form-control" placeholder="Amount Fed" name="AmountFed">
+                    <label>Amount Fed (g)</label>
+                    <input required type="text" class="form-control" name="AmountFed">
                 </div>
 
                 <div class="form-group col-md-4 col-sm-12">
-                    <input required type="text" class="form-control" placeholder="Leftover Food" name="LeftoverFood">
+                    <label>Leftover Food (g)</label>
+                    <input required type="text" class="form-control" name="LeftoverFood">
                 </div>
 
                 <div class="form-group col-md-4 col-sm-12">
+                    <label>Medicine (Optional)</label>
                     <select class="form-control" name="Medicine">
-                        <option value="" disabled selected>Medicine (Optional)</option>
+                        <option value="" disabled selected></option>
                         <% for(var i=0; i<meds.length; i++) { %>
                         <option value="<%=meds[i].name%>">
                             <%=meds[i].name%>
@@ -52,15 +57,18 @@
                 </div>
 
                 <div class="form-group col-md-4 col-sm-12">
-                    <input required type="text" class="form-control" placeholder="Goal Weight" name="GoalWeight">
+                    <label>Goal Weight (g)</label>
+                    <input required type="text" class="form-control" name="GoalWeight">
                 </div>
                 <div class="form-group col-md-4 col-sm-12">
-                    <input required type="text" class="form-control" placeholder="Actual Weight" name="ActualWeight">
+                    <label>Actual Weight (g)</label>
+                    <input required type="text" class="form-control" name="ActualWeight">
                 </div>
 
                 <div class="form-group col-md-4 col-sm-12">
+                    <label>Weather Conditions</label>
                     <select required class="form-control" name="WeatherConditions">
-                        <option value="" disabled selected>Weather</option>
+                        <option value="" disabled selected></option>
                         <option value="Sunny">Sunny</option>
                         <option value="Cloudy">Cloudy</option>
                         <option value="Rainy">Rainy</option>
@@ -69,14 +77,17 @@
                 </div>
 
                 <div class="form-group col-md-4 col-sm-12">
-                    <textarea type="text" class="form-control" placeholder="General Comments (Optional)" name="GeneralComments"></textarea>
+                    <label>General Comments (Optional)</label>
+                    <textarea type="text" class="form-control" name="GeneralComments"></textarea>
                 </div>
 
                 <div class="form-group col-md-4 col-sm-12">
-                    <textarea type="text" class="form-control" placeholder="Training Comments (Optional)" name="TrainingComments"></textarea>
+                    <label>Training Comments (Optional)</label>
+                    <textarea type="text" class="form-control" name="TrainingComments"></textarea>
                 </div>
 
                 <div class="form-group col-md-4 col-sm-12">
+                    <label>Date & Time</label>
                     <div class="well">
                         <input class="form-control" type="datetime-local" id="datetimepicker" name="Date" max="2020-12-10T00:00" required>                 
                     </div>

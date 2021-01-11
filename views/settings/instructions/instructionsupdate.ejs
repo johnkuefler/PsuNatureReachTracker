@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html>
-<%- include('../../partials/header', {title: 'Nature Reach - Edit Instruction'}); %>
+<%- include('../../partials/header', {title: 'Nature Reach - Update Instruction'}); %>
 
 <body>
     <% include ../../partials/navbar %>
     <div class="container">
         <br>
-        <h1><%= title %></h1>
-        <p>Update an instruction in the database</p>
+        <h1 class="ml-3"><%= title %></h1>
+        <p class="ml-3">Update an instruction in the database</p>
         <form method="POST" action="/settings/instructions/update">
             <input type="hidden" name="id" value="<%= data._id  %>"/>
-            <div class="container-fluid" style="width: 18rem;">
-                <div class="form-group" col-4>
+
+           
+                <div class="form-group col-md-4 col-sm-12">
                     <label>Instruction</label>
                     <input type="text" class="form-control" placeholder="Comment" name="Comment" value="<%= data.Comment  %>">
                 </div>
-                <div class="form-check" col-4>
+
+                <div class="form-check col-md-4 col-sm-12 ml-3">
                     <% if (data.Enabled) { %>
                         <input type="checkbox" class="form-check-input" id="Enabled" name="Enabled" checked />
                       <% } else { %>
@@ -23,10 +25,14 @@
                       <% } %>
                     <label class="form-check-label">Enabled</label>
                 </div>
-                    <button type="submit" class="btn mt-1 btn-primary">Submit</button>
+                <br>
+
+                <div class="form-group col-md-4 col-sm-12">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
                 
 
-            </div>
+            
         </form>
     </div>
     <% include ../../partials/scripts %>

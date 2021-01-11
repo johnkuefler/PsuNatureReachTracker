@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<%- include('../../partials/header', {title: 'Nature Reach - Edit Animal' }); %>
+<%- include('../../partials/header', {title: 'Nature Reach - Update Animal' }); %>
 
     <body>
         <% include ../../partials/navbar %>
@@ -15,12 +15,14 @@
 
 
                     <div class="form-group col-md-4 col-sm-12">
-                        <input type="text" class="form-control" placeholder="Species" name="species"
+                        <label>Species</label>
+                        <input type="text" class="form-control" name="species"
                             value="<%= data.species %>">
                     </div>
 
                     <div class="form-group col-md-4 col-sm-12">
-                        <input type="text" class="form-control" placeholder="Nickname" name="nickname"
+                        <label>Nickname</label>
+                        <input type="text" class="form-control" name="nickname"
                             value="<%= data.nickName %>">
                     </div>
 

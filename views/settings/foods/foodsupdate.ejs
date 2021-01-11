@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<%- include('../../partials/header', {title: 'Nature Reach - Edit food'}); %>
+<%- include('../../partials/header', {title: 'Nature Reach - Update food'}); %>
 
 <body>
     <% include ../../partials/navbar %>
@@ -13,10 +13,12 @@
             
             
                 <div class="form-group col-md-4 col-sm-12">
-                    <input type="text" class="form-control" placeholder="Name of food" name="name" value="<%= data.name  %>">
+                    <label>Name of Food</label>
+                    <input type="text" class="form-control" name="name" value="<%= data.name  %>">
                 </div>
+
                 <div class="form-group col-md-4 col-sm-12">
-                    <button type="submit" class="btn mt-1 btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
 
             
