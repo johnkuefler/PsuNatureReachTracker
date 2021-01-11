@@ -1,39 +1,47 @@
 <!DOCTYPE html>
 <html>
-<%- include('../../partials/header', {title: 'Nature Reach - Edit Animal'}); %>
+<%- include('../../partials/header', {title: 'Nature Reach - Edit Animal' }); %>
 
-<body>
-    <% include ../../partials/navbar %>
-    <div class="container">
-        <br>
-        <h1>Update Animal</h1>
-        <p>Update an animal in the database</p>
-        <form method="POST" action="/settings/birds/update">
-            <input type="hidden" name="id" value="<%= data._id %>"/>
-            <div class="container-fluid" style="width: 18rem;">
-                <div class="form-group" col-4>
-                    <label>Species</label>
-                    <input type="text" class="form-control" placeholder="Species" name="species" value="<%= data.species %>">
-                </div>
-                <div class="form-group" col-4>
-                    <label>Nickname</label>
-                    <input type="text" class="form-control" placeholder="Nickname" name="nickname" value="<%= data.nickName %>">
-                </div>
-                <div class="form-check" col-4>
-                    <% if (data.enabled) { %>
-                        <input type="checkbox" class="form-check-input" id="enabled" name="enabled" checked>
-                      <% } else { %>
-                        <input type="checkbox" class="form-check-input" id="enabled" name="enabled">
-                      <% } %>
-                    <label class="form-check-label">Enabled</label>
-                </div>
-                    <button type="submit" class="btn mt-1 btn-primary">Submit</button>
-                
+    <body>
+        <% include ../../partials/navbar %>
+            <br>
 
+            <div class="container">
+                <form method="POST" action="/settings/birds/update">
+
+                    <h1 class="ml-3">Update Animal</h1>
+                    <p class="ml-3">Update an animal in the database</p>
+                    <input type="hidden" name="id" value="<%= data._id %>" />
+
+
+                    <div class="form-group col-md-4 col-sm-12">
+                        <input type="text" class="form-control" placeholder="Species" name="species"
+                            value="<%= data.species %>">
+                    </div>
+
+                    <div class="form-group col-md-4 col-sm-12">
+                        <input type="text" class="form-control" placeholder="Nickname" name="nickname"
+                            value="<%= data.nickName %>">
+                    </div>
+
+                    <div class="form-check col-md-4 col-sm-12 ml-3">
+                        <% if (data.enabled) { %>
+                            <input type="checkbox" class="form-check-input" id="enabled" name="enabled" checked>
+                            <% } else { %>
+                                <input type="checkbox" class="form-check-input" id="enabled" name="enabled">
+                                <% } %>
+                                    <label class="form-check-label">Enabled</label>
+                    </div>
+                    <br>
+
+                    <div class="form-group col-md-4 col-sm-12">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+
+
+                </form>
             </div>
-        </form>
-    </div>
-    <% include ../../partials/scripts %>
-</body>
+            <% include ../../partials/scripts %>
+    </body>
 
 </html>

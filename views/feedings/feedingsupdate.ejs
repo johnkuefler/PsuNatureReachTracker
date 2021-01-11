@@ -6,15 +6,12 @@
     <% include ../partials/navbar %>
     <div class="container">
         <br>
-        <h1><%= title %></h1>
-        <p>Update a Feeding in the database</p>
+        <h1 class="ml-3"><%= title %></h1>
+        <p class="ml-3">Update a Feeding in the database</p>
         <form method="POST" action="/feedings/update">
             <input type="hidden" name="id" value="<%= data._id %>"/>
-            <div class="container-fluid" style="width: 18rem;">
-
-                
-
-                <div class="form-group" col-4>
+            
+                <div class="form-group col-md-4 col-sm-12">
                     <select required class="form-control" name="Bird">
                         <option><%=data.Bird%></option>
                         <% for(var i=0; i<birds.length; i++) { %>
@@ -25,7 +22,7 @@
                     </select>
                 </div>
 
-                <div class="form-group" col-4>
+                <div class="form-group col-md-4 col-sm-12">
                     <select required class="form-control" name="Food">
                         <option><%= data.Food %></option>
                         <% for(var i=0; i<foods.length; i++) { %>
@@ -36,15 +33,15 @@
                     </select>
                 </div>
 
-                <div class="form-group" col-4>
+                <div class="form-group col-md-4 col-sm-12">
                     <input required type="text" class="form-control" placeholder="Amount Fed" name="AmountFed" value="<%= data.AmountFed %>">
                 </div>
 
-                <div class="form-group" col-4>
+                <div class="form-group col-md-4 col-sm-12">
                     <input required type="text" class="form-control" placeholder="Leftover Food" name="LeftoverFood" value="<%= data.LeftoverFood %>"">
                 </div>
 
-                <div class="form-group" col-4>
+                <div class="form-group col-md-4 col-sm-12">
                     <select class="form-control" name="Medicine">
                         <option><%= data.Medicine %></option>
                         <% for(var i=0; i<meds.length; i++) { %>
@@ -55,15 +52,15 @@
                     </select>
                 </div>
 
-                <div class="form-group" col-4>
+                <div class="form-group col-md-4 col-sm-12">
                     <input required type="text" class="form-control" placeholder="Goal Weight" name="GoalWeight" value="<%= data.GoalWeight %>">
                 </div>
 
-                <div class="form-group" col-4>
+                <div class="form-group col-md-4 col-sm-12">
                     <input required type="text" class="form-control" placeholder="Actual Weight" name="ActualWeight" value="<%= data.ActualWeight %>"">
                 </div>
 
-                <div class="form-group" col-4>
+                <div class="form-group col-md-4 col-sm-12">
                     <select required class="form-control" name="WeatherConditions">
                         <option><%= data.WeatherConditions %></option>
                         <option value="Sunny">Sunny</option>
@@ -73,25 +70,25 @@
                     </select>
                 </div>
 
-                <div class="form-group" col-4>
-                    <input type="text" class="form-control" placeholder="Comments (Optional)" name="Comments" value="<%= data.GeneralComments %>">
+                <div class="form-group col-md-4 col-sm-12">
+                    <textarea wrap="soft" class="form-control" placeholder="Comments (Optional)" name="Comments"><%= data.GeneralComments %></textarea>
                 </div>
 
-                <div class="form-group" col-4>
-                    <input type="text" class="form-control" placeholder="Comments (Optional)" name="Comments" value="<%= data.TrainingComments %>">
+                <div class="form-group col-md-4 col-sm-12">
+                    <textarea class="form-control" placeholder="Comments (Optional)" name="Comments"><%= data.TrainingComments %></textarea>
                 </div>
 
-                <div class="form-group" col-4>
+                <div class="form-group col-md-4 col-sm-12">
                     <div class="well">
                         <input class="form-control" type="datetime-local" id="datetimepicker" name="Date" max="2020-12-10T00:00" required value="<%= data.Date %>">                 
                     </div>
                 </div>
 
-                <div class="form-group" col-4>
+                <div  class="form-group col-md-4 col-sm-12">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
 
-            </div>
+            
         </form>
     </div>
     <% include ../partials/scripts %>
