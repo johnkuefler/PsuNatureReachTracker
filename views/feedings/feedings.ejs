@@ -20,9 +20,10 @@
         <h1>
           <%= title %>
         </h1>
-        <div class="my-3"><a href="./feedings/create" class="btn-lg mb-2 btn-primary">+ Create Feeding</a></div>
-        <div class="my-3"><a href="./feedings/allexport" class="btn-lg mb-2 btn-success">Export All Feedings</a></div>
-        <div class="my-3"><a href="./feedings/export" class="btn-lg mb-2 btn-success">Export Specific Feedings</a></div>
+        <div class="my-3"><button onclick="window.location.href='./feedings/create';" class="btn mb-2 btn-primary">+ Create Feeding</button>
+        <button onclick="window.location.href='./feedings/allexport';" class="btn mb-2 btn-success">Export All Feedings</button>
+        <button onclick="window.location.href='./feedings/export';" class="btn mb-2 btn-success">Export Specific Feedings</button>
+      </div>
 
         <table id="feedingsTable" class="table table-bordered table-striped table-responsive">
           <thead>

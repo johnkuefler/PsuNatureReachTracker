@@ -7,14 +7,13 @@
 
   <div class="container">
     <br>
-    <br>
     <h1>Upload Animal Picture</h1>
     <form action="/settings/birds/addanimalpicture" 
     enctype="multipart/form-data" method="POST"> 
     
       <input type="hidden" name="id" value="<%=data._id%>" />
       <div class="my-3">
-        <img style="width: 150px; height: 150px;" id="imageView" src="/images/defaultanimalpic.png" />
+        <img style="width: 150px; height: 150px;" id="imageView" src="/images/birdsilhouette.png" />
       </div>
       <div>
         <input type="file" id="image" accept="image/x-png,image/gif,image/jpeg"

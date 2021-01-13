@@ -1,25 +1,31 @@
 <!DOCTYPE html>
 <html>
-<%- include('../../partials/header', {title: 'Nature Reach - Create Food'}); %>
+<%- include('../../partials/header', {title: 'Nature Reach - Create Food' }); %>
 
-<body>
-    <% include ../../partials/navbar %>
-    <div class="container">
-        <br>
-        <h1><%= title %></h1>
-        <p>Create a new food to add to the database</p>
-        <div class="container-fluid" style="width: 18rem;">
-            <form method ="POST" action="/settings/foods/create">
-                <div class="form-group" col-4>
-                    <input required type="text" class="form-control" placeholder="Name of food" name="nameoffood">
-                </div>
-                <div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <% include ../../partials/scripts %>
-</body>
+    <body>
+        <% include ../../partials/navbar %>
+            <div class="container">
+                <br>
+                <h1 class="ml-3">
+                    <%= title %>
+                </h1>
+                <p class="ml-3">Create a new food to add to the database</p>
+
+
+                <form method="POST" action="/settings/foods/create">
+
+                    <div class="form-group col-md-4 col-sm-12">
+                        <label>Name of Food</label>
+                        <input required type="text" class="form-control" name="nameoffood">
+                    </div>
+
+                    <div class="form-group col-md-4 col-sm-12">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+
+            </div>
+            <% include ../../partials/scripts %>
+    </body>
 
 </html>

@@ -13,17 +13,17 @@
       min-height: 100vh;
     }
 
-    .card {
-      opacity: 0.7;
-    }
-
-    .card:hover {
-      opacity: 1.0;
-    }
-
     .col {
       display: flex;
       flex-wrap: wrap;
+    }
+
+    #welcome {
+      text-shadow: 2px 2px #000000;
+    }
+
+    #quickmenu {
+      text-shadow: 2px 2px #000000;
     }
   </style>
 
@@ -45,11 +45,12 @@
                 <div class="container">
                   <br>
                   <div class="container">
-                    <h1 style="color:black" class="ml-4">Welcome!</h1>
-                    <br>
-                    <h5 style="color:black" class="ml-4">Quick Menu:</h5>
-
-                    <div class="col mb-4"> 
+                    <div class="ml-4">
+                      <h1 style="color:white" id="welcome">Welcome!</h1>
+                      <br>
+                      <h5 style="color:white" id="quickmenu">Quick Menu:</h5>
+                    </div>
+                    <div class="col mb-4">
                       <div class="col mb-4">
                         <div class="card h-100" style="width: 100%">
                           <div class="card-body d-flex flex-column">

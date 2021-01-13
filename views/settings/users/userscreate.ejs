@@ -6,38 +6,46 @@
         <% include ../../partials/navbar %>
             <div class="container">
                 <br>
-                <h1>Create a User</h1>
-                <p>Create a new user to add to the database</p>
+                <h1 class="ml-3">Create a User</h1>
+                <p class="ml-3">Create a new user to add to the database</p>
 
                 <form action="/settings/users/create" method="post" enctype="text/html">
-                    <div class="container-fluid" style="width: 18rem;">
-                        <div class="form-group" col-4>
-                            <label>Email</label>
-                            <input required type="text" class="form-control" name="email">
-                        </div>
-                        <div class="form-group"  col-4>
-                            <label>First Name</label>
-                            <input required type="text" class="form-control" name="firstName">
-                        </div>
-                        <div class="form-group"  col-4>
-                            <label>Last Name</label>
-                            <input required type="text" class="form-control" name="lastName">
-                        </div>
-                        <div class="form-group"  col-4>
-                            <label>Password</label>
-                            <input required type="password" class="form-control" name="password">
-                        </div>
-                        <div class="form-group"  col-4>
-                            <label>Role</label>
-                            <br>
-                            <select name="role" id="role">
-                                <option value="user">User</option>
-                                <option value="Admin">Admin</option>
-                            </select>
-                        </div>
-                        <br>
-                        <button type="submit" class="btn mt-1 btn-primary">+ Create</button>
+
+                    <div class="form-group col-md-4 col-sm-12">
+                        <label>Email</label>
+                        <input required type="text" class="form-control" name="email">
                     </div>
+
+                    <div class="form-group col-md-4 col-sm-12">
+                        <label>First Name</label>
+                        <input required type="text" class="form-control" name="firstName">
+                    </div>
+
+                    <div class="form-group col-md-4 col-sm-12">
+                        <label>Last Name</label>
+                        <input required type="text" class="form-control" name="lastName">
+                    </div>
+
+                    <div class="form-group col-md-4 col-sm-12">
+                        <label>Password</label>
+                        <input required type="password" class="form-control" name="password">
+                    </div>
+
+                    <div class="form-group col-md-4 col-sm-12">
+                        <label>Role</label>
+                        <br>
+                        <select name="role" id="role" class="form-control">
+                            <option value="" disabled selected></option>
+                            <option value="User">User</option>
+                            <option value="Admin">Admin</option>
+                        </select>
+                    </div>
+
+                    <br>
+                    <div class="form-group col-md-4 col-sm-12">
+                        <button type="submit" class="btn btn-primary">+ Create</button>
+                    </div>
+
                 </form>
 
 

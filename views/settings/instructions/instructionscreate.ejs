@@ -1,29 +1,38 @@
 <!DOCTYPE html>
 <html>
-<%- include('../../partials/header', {title: 'Nature Reach - Create Instruction'}); %>
+<%- include('../../partials/header', {title: 'Nature Reach - Create Instruction' }); %>
 
-<body>
-    <% include ../../partials/navbar %>
-    <div class="container">
-        <br>
-        <h1><%= title %></h1>
-        <p>Create a new instruction to show to the users</p>
-        <div class="container-fluid" style="width: 18rem;">
-            <form method ="POST" action="/settings/instructions/create">
-                <div class="form-group" col-4>
-                    <input required type="text" class="form-control" placeholder="Comment" name="Comment">
-                </div>
-                <div>
-                    <div class="form-check" col-4>
+    <body>
+        <% include ../../partials/navbar %>
+            <div class="container">
+                <br>
+                <h1 class="ml-3">
+                    <%= title %>
+                </h1>
+                <p class="ml-3">Create a new instruction to show to the users</p>
+
+                <form method="POST" action="/settings/instructions/create">
+
+                    <div class="form-group col-md-4 col-sm-12">
+                        <label>Instruction</label>
+                        <input required type="text" class="form-control"  name="Comment">
+                    </div>
+
+
+                    <div class="form-check col-md-4 col-sm-12 ml-3">
                         <input type="checkbox" class="form-check-input" name="Enabled">
                         <label class="form-check-label">Enabled</label>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <% include ../../partials/scripts %>
-</body>
+                    <br>
+
+                    <div class="form-group col-md-4 col-sm-12">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+
+
+                </form>
+            </div>
+            <% include ../../partials/scripts %>
+    </body>
 
 </html>
