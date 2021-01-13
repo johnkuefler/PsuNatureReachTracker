@@ -1,141 +1,157 @@
 <!DOCTYPE html>
 <html>
-<%- include('../partials/header', {title: 'Nature Reach - Update Feeding'}); %>
+<%- include('../partials/header', {title: 'Nature Reach - Update Feeding' }); %>
 
-<body>
-    <% include ../partials/navbar %>
-    <div class="container">
-        <br>
-        <h1 class="ml-3"><%= title %></h1>
-        <p class="ml-3">Update a Feeding in the database</p>
-        <form method="POST" action="/feedings/update">
-            <input type="hidden" name="id" value="<%= data._id %>"/>
-            
-                <div class="form-group col-md-4 col-sm-12">
-                    <label>Animal</label>
-                    <select required class="form-control" name="Bird">
-                        <option><%=data.Bird%></option>
-                        <% for(var i=0; i<birds.length; i++) { %>
-                        <option value="<%=birds[i].nickName%> - <%=birds[i].species%>">
-                            <%=birds[i].nickName%> - <%=birds[i].species%>
-                        </option>
-                        <% } %>
-                    </select>
-                </div>
+    <body>
+        <% include ../partials/navbar %>
+            <div class="container">
+                <br>
+                <h1 class="ml-3">
+                    <%= title %>
+                </h1>
+                <p class="ml-3">Update a Feeding in the database</p>
+                <form method="POST" action="/feedings/update">
+                    <input type="hidden" name="id" value="<%= data._id %>" />
 
-                <div class="form-group col-md-4 col-sm-12">
-                    <label>Food</label>
-                    <select required class="form-control" name="Food">
-                        <option><%= data.Food %></option>
-                        <% for(var i=0; i<foods.length; i++) { %>
-                        <option value="<%=foods[i].name%>">
-                            <%=foods[i].name%>
-                        </option>
-                        <% } %>
-                    </select>
-                </div>
-
-                <div class="form-group col-md-4 col-sm-12">
-                    <label>Amount Fed (g)</label>
-                    <input required type="text" class="form-control" name="AmountFed" value="<%= data.AmountFed %>">
-                </div>
-
-                <div class="form-group col-md-4 col-sm-12">
-                    <label>Leftover Food (g)</label>
-                    <input required type="text" class="form-control" name="LeftoverFood" value="<%= data.LeftoverFood %>"">
-                </div>
-
-                <div class="form-group col-md-4 col-sm-12">
-                    <label>Medicine (Optional)</label>
-                    <select class="form-control" name="Medicine">
-                        <option><%= data.Medicine %></option>
-                        <% for(var i=0; i<meds.length; i++) { %>
-                        <option value="<%=meds[i].name%>">
-                            <%=meds[i].name%>
-                        </option>
-                        <% } %>
-                    </select>
-                </div>
-
-                <div class="form-group col-md-4 col-sm-12">
-                    <label>Goal Weight (g)</label>
-                    <input required type="text" class="form-control" name="GoalWeight" value="<%= data.GoalWeight %>">
-                </div>
-
-                <div class="form-group col-md-4 col-sm-12">
-                    <label>Actual Weight (g)</label>
-                    <input required type="text" class="form-control" name="ActualWeight" value="<%= data.ActualWeight %>"">
-                </div>
-
-                <div class="form-group col-md-4 col-sm-12">
-                    <label>Weather Conditions</label>
-                    <select required class="form-control" name="WeatherConditions">
-                        <option><%= data.WeatherConditions %></option>
-                        <option value="Sunny">Sunny</option>
-                        <option value="Cloudy">Cloudy</option>
-                        <option value="Rainy">Rainy</option>
-                        <option value="Snowy">Snowy</option>                        
-                    </select>
-                </div>
-
-                <div class="form-group col-md-4 col-sm-12">
-                    <label>General Comments (Optional)</label>
-                    <textarea wrap="soft" class="form-control"name="Comments"><%= data.GeneralComments %></textarea>
-                </div>
-
-                <div class="form-group col-md-4 col-sm-12">
-                    <label>Training Comments (Optional)</label>
-                    <textarea class="form-control" name="Comments"><%= data.TrainingComments %></textarea>
-                </div>
-
-                <div class="form-group col-md-4 col-sm-12">
-                    <label>Date & Time</label>
-                    <div class="well">
-                        <input class="form-control" type="datetime-local" id="datetimepicker" name="Date" max="2020-12-10T00:00" required value="<%= data.Date %>">                 
+                    <div class="form-group col-md-4 col-sm-12">
+                        <label>Animal</label>
+                        <select required class="form-control" name="Bird">
+                            <option>
+                                <%=data.Bird%>
+                            </option>
+                            <% for(var i=0; i<birds.length; i++) { %>
+                                <option value="<%=birds[i].nickName%> - <%=birds[i].species%>">
+                                    <%=birds[i].nickName%> - <%=birds[i].species%>
+                                </option>
+                                <% } %>
+                        </select>
                     </div>
-                </div>
 
-                <div  class="form-group col-md-4 col-sm-12">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
+                    <div class="form-group col-md-4 col-sm-12">
+                        <label>Food</label>
+                        <select required class="form-control" name="Food">
+                            <option>
+                                <%= data.Food %>
+                            </option>
+                            <% for(var i=0; i<foods.length; i++) { %>
+                                <option value="<%=foods[i].name%>">
+                                    <%=foods[i].name%>
+                                </option>
+                                <% } %>
+                        </select>
+                    </div>
 
-            
-        </form>
-    </div>
-    <% include ../partials/scripts %>
+                    <div class="form-group col-md-4 col-sm-12">
+                        <label>Amount Fed (g)</label>
+                        <input required type="text" class="form-control" name="AmountFed" value="<%= data.AmountFed %>">
+                    </div>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-          var today = new Date();
-          var dd = today.getDate();
-          var mm = today.getMonth()+1;
-          var yyyy = today.getFullYear();
-          var hh = today.getHours();
-          var minutes = today.getMinutes();
+                    <div class="form-group col-md-4 col-sm-12">
+                        <label>Leftover Food (g)</label>
+                        <input required type="text" class="form-control" name="LeftoverFood"
+                            value="<%= data.LeftoverFood %>">
+                    </div>
 
-          if (dd<10) {
-              dd= '0' + dd
-          }
+                    <div class="form-group col-md-4 col-sm-12">
+                        <label>Medicine (Optional)</label>
+                        <select class="form-control" name="Medicine">
+                            <option>
+                                <%= data.Medicine %>
+                            </option>
+                            <% for(var i=0; i<meds.length; i++) { %>
+                                <option value="<%=meds[i].name%>">
+                                    <%=meds[i].name%>
+                                </option>
+                                <% } %>
+                        </select>
+                    </div>
 
-          if (mm<10) {
-              mm = '0' + mm
-          }
+                    <div class="form-group col-md-4 col-sm-12">
+                        <label>Goal Weight (g)</label>
+                        <input required type="text" class="form-control" name="GoalWeight"
+                            value="<%= data.GoalWeight %>">
+                    </div>
 
-          if (hh < 10) {
-              hh = '0' + hh
-          }
+                    <div class="form-group col-md-4 col-sm-12">
+                        <label>Actual Weight (g)</label>
+                        <input required type="text" class="form-control" name="ActualWeight"
+                            value="<%= data.ActualWeight %>">
+                    </div>
 
-          if (minutes < 10) {
-              minutes = '0' + minutes
-          }
+                    <div class="form-group col-md-4 col-sm-12">
+                        <label>Weather Conditions</label>
+                        <select required class="form-control" name="WeatherConditions">
+                            <option>
+                                <%= data.WeatherConditions %>
+                            </option>
+                            <option value="Sunny">Sunny</option>
+                            <option value="Cloudy">Cloudy</option>
+                            <option value="Rainy">Rainy</option>
+                            <option value="Snowy">Snowy</option>
+                        </select>
+                    </div>
 
-          today = yyyy + '-' + mm + '-' + dd + 'T' + hh + ':' + minutes;
-          document.getElementById("datetimepicker").setAttribute("max", today);
-        });
-        </script>
+                    <div class="form-group col-md-4 col-sm-12">
+                        <label>General Comments (Optional)</label>
+                        <textarea id="generalComments" type="text" wrap="soft" class="form-control"
+                            name="GeneralComments"><%= data.GeneralComments %></textarea>
+                    </div>
+
+                    <div class="form-group col-md-4 col-sm-12">
+                        <label>Training Comments (Optional)</label>
+                        <textarea id="trainingComments" type="text" class="form-control"
+                            name="TrainingComments"><%= data.TrainingComments %></textarea>
+                    </div>
+
+                    <div class="form-group col-md-4 col-sm-12">
+                        <label>Date & Time</label>
+                        <div class="well">
+                            <input class="form-control" type="datetime-local" id="datetimepicker" name="Date"
+                                max="2020-12-10T00:00" required value="<%= data.Date %>">
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4 col-sm-12">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+
+
+                </form>
+            </div>
+            <% include ../partials/scripts %>
+
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        var today = new Date();
+                        var dd = today.getDate();
+                        var mm = today.getMonth() + 1;
+                        var yyyy = today.getFullYear();
+                        var hh = today.getHours();
+                        var minutes = today.getMinutes();
+
+                        if (dd < 10) {
+                            dd = '0' + dd
+                        }
+
+                        if (mm < 10) {
+                            mm = '0' + mm
+                        }
+
+                        if (hh < 10) {
+                            hh = '0' + hh
+                        }
+
+                        if (minutes < 10) {
+                            minutes = '0' + minutes
+                        }
+
+                        today = yyyy + '-' + mm + '-' + dd + 'T' + hh + ':' + minutes;
+                        document.getElementById("datetimepicker").setAttribute("max", today);
+                    });
+                </script>
 
 
 
-</body>
+    </body>
 
 </html>
