@@ -484,7 +484,7 @@ exports.get_update_med_image = function (req, res) {
 exports.put_update_bird_image = function (req, res) {
     var obj = {
         img: {
-            data: fs.readFileSync(path.join('./public/uploads/' + req.file.filename)),
+            data: fs.readFileSync(path.join('.\\public\\uploads\\' + req.file.filename)),
             contentType: 'image/png'
         }
     }
@@ -495,7 +495,7 @@ exports.put_update_bird_image = function (req, res) {
 
     console.log(updateAnimal);
     
-    fs.unlinkSync(path.join('./public/uploads/' + req.file.filename));
+    fs.unlinkSync(path.join('.\\public\\uploads\\' + req.file.filename));
 
     Bird.findOneAndUpdate({ _id: req.body.id }, updateAnimal, function (err, data) {
         if (err) {
