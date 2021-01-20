@@ -12,6 +12,9 @@ var passport = require('passport');
 var flash    = require('connect-flash');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var fs = require('fs');
+var path = require('path');
+
 
 require('dotenv').config({path: __dirname + '/.env'});
 
