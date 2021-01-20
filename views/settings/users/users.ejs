@@ -40,6 +40,7 @@
           <td>Last Name</td>
           <td>Register Date</td>
           <td>Role</td>
+          <td>Enabled</td>
           <td>Actions</td>
         </tr>
       </thead>
@@ -60,6 +61,9 @@
         <td><%=data[i].lastName%></td>
         <td><%=data[i].registerDate.toLocaleDateString("en-US")%></td>
         <td><%=data[i].role%></td>
+        <td>
+          <%=data[i].Enabled%>
+        </td>
         <td><a href="./users/update?_id=<%= data[i]._id %>"><span style="font-size: 20px;"><i class="fa fa-pencil"></i></span></a> | <a
           href="./users/updateimage?_id=<%= data[i]._id %>"><span style="font-size: 20px;"><i class="fa fa-image"></i></span></a> | <a 
           href="./users/delete?_id=<%= data[i]._id %>" 
@@ -77,7 +81,7 @@
     $(document).ready(function () {
       $('#userTable').DataTable({
         responsive: true,
-        order: [[4, "asc"]]
+        order: [[6, "desc"]]
       });
     });
   </script>

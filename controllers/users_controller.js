@@ -48,11 +48,16 @@ exports.get_update_user = function (req, res) {
 }
 
 exports.post_update_user = function (req, res) {
+    let Enabled = false;
+    if (req.body.Enabled == 'on') {
+        Enabled = true;
+    }
     const user = new User();
     const updateData = {
         email: req.body.email,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
+        Enabled: Enabled,
         role: req.body.role
     };
 
@@ -73,6 +78,10 @@ exports.post_update_user = function (req, res) {
 }
 
 exports.post_create_user = function (req, res) {
+    let enabled = false;
+    if (req.body.Enabled == 'on') {
+        enabled = true;
+    }
 
     const user = new User();
 
@@ -82,6 +91,7 @@ exports.post_create_user = function (req, res) {
     user.password = user.generateHash(req.body.password);
     user.role = req.body.role;
     user.passwordIsExpired = true;
+    user.Enabled = enabled;
     user.profileImage.data = "";
     user.profileImage.contentType = "";
 
