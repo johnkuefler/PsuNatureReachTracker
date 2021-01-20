@@ -38,6 +38,10 @@ const userSchema = new mongoose.Schema(
             contentType: String,
             required: false
         },
+        Enabled: { 
+            type: Boolean, 
+            required: true
+        },
     },
 );
 

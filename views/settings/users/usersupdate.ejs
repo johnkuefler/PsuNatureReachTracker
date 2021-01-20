@@ -43,6 +43,16 @@
                     </select>
                 </div>
 
+                <div class="form-check col-md-4 col-sm-12 ml-3">
+                    <% if (data.Enabled) { %>
+                        <input type="checkbox" class="form-check-input" id="Enabled" name="Enabled" checked />
+                      <% } else { %>
+                        <input type="checkbox" class="form-check-input" id="Enabled" name="Enabled" />
+                      <% } %>
+                    <label class="form-check-label">Enabled</label>
+                </div>
+                <br>
+
                 <div class="form-group col-md-4 col-sm-12"> 
                     <button type="submit" class="btn btn-primary">Update</button>
                 </div>
