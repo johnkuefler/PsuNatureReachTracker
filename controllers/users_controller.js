@@ -117,6 +117,7 @@ exports.get_all_export_users = async function(req, res) {
         {header: 'First Name', key: 'firstName', width: 20},
         {header: 'Last Name', key: 'lastName', width: 16},
         {header: 'Register Date', key: 'registerDate', width: 16},
+        {header: 'Enabled', key: 'Enabled', width: 16},
         {header: 'Role', key: 'role', width: 16},
       ];
   

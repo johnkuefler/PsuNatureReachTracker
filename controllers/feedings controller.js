@@ -36,7 +36,7 @@ let displayFeedings = [];
 
 for (let i=0; i<feedings.length; i++) {
     displayFeedings.push({
-        Date: feedings[i].Date.toLocaleString("en-US", {timeZone: 'America/Chicago'}),
+        Date: feedings[i].Date.toLocaleString("en-US", {timeZone: 'UTC'}),
         Bird: feedings[i].Bird,
         Food: feedings[i].Food,
         Medicine: feedings[i].Medicine,
@@ -93,7 +93,7 @@ exports.get_all_export_feedings = async function(req, res) {
 
     for (let i=0; i<feedings.length; i++) {
         displayFeedings.push({
-            Date: feedings[i].Date.toLocaleString("en-US", {timeZone: 'America/Chicago'}),
+            Date: feedings[i].Date.toLocaleString("en-US", {timeZone: "UTC"}),
             Bird: feedings[i].Bird,
             Food: feedings[i].Food,
             Medicine: feedings[i].Medicine,
