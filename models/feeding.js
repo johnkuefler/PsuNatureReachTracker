@@ -11,6 +11,8 @@ const feedingsSchema = new Schema({
 	GoalWeight: { type: String, required: true},
 	ActualWeight: { type: String, required: true},
 	WeatherConditions: { type: String, required: true},
+	DailyHighTemperature: {type: String, required: true},
+	DailyLowTemperature: {type: String, required: true},
 	Feeder: { type: String, required: true},
 	GeneralComments: { type: String, required: false},
 	TrainingComments: { type: String, required: false},

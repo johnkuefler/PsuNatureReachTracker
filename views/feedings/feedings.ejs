@@ -35,8 +35,14 @@
               <td>Leftover Food (g)</td>
               <td>Medicine</td>
               <td>Goal Weight (g)</td>
-              <td>Actual Weight (g)</td>
               <td>Weather Conditions</td>
+              <td>Actual Weight (g)</td>
+              <td>
+                Daily High Temperature (°F)
+              </td>
+              <td>
+                Daily Low Temperature (°F)
+              </td>
               <td>Feeder</td>
               <td>General Comments</td>
               <td>Training Comments</td>
@@ -71,6 +77,13 @@
               </td>
               <td>
                 <%=data[i].WeatherConditions%>
+              </td>
+              <td>
+                <%=data[i].DailyHighTemperature%> °F
+              </td>
+              
+              <td>
+                <%=data[i].DailyLowTemperature%> °F
               </td>
               <td>
                 <%=data[i].Feeder%>

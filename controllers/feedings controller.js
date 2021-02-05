@@ -175,6 +175,8 @@ exports.post_feedings_create = function (req, res) {
         GoalWeight: req.body.GoalWeight,
         ActualWeight: req.body.ActualWeight,
         WeatherConditions: req.body.WeatherConditions,
+        DailyHighTemperature: req.body.DailyHighTemperature,
+        DailyLowTemperature: req.body.DailyLowTemperature,
         Feeder: res.locals.user.firstName + ' ' + res.locals.user.lastName,
         GeneralComments: req.body.GeneralComments,
         TrainingComments: req.body.TrainingComments
@@ -231,6 +233,8 @@ exports.post_feedings_update = function (req, res) {
         GoalWeight: req.body.GoalWeight,
         ActualWeight: req.body.ActualWeight,
         WeatherConditions: req.body.WeatherConditions,
+        DailyHighTemperature: req.body.DailyHighTemperature,
+        DailyLowTemperature: req.body.DailyLowTemperature,
         Feeder: res.locals.user.firstName + ' ' + res.locals.user.lastName,
         GeneralComments: req.body.GeneralComments,
         TrainingComments: req.body.TrainingComments
