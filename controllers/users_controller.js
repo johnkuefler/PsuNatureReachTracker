@@ -15,7 +15,8 @@ exports.get_users = function (req, res) {
             }
         })
     } else {
-        res.render('error');
+        //res.render('error');
+        res.redirect('/login');
         console.log('You do not have permission to this page.')
     }
 }
@@ -25,7 +26,8 @@ exports.get_create_user = function (req, res) {
     if (currentUser.role === "Admin") {
         res.render('settings/users/userscreate');
     } else {
-        res.render('error');
+        //res.render('error');
+        res.redirect('/login');
         console.log('You do not have permission to this page.')
     }
 }
@@ -42,12 +44,14 @@ exports.get_update_user = function (req, res) {
             }
         });
     } else {
-        res.render('error');
+        //res.render('error');
+        res.redirect('/login');
         console.log('You do not have permission to this page.')
     }
 }
 
 exports.post_update_user = function (req, res) {
+    let currentUser = res.locals.user;
     let Enabled = false;
     if (req.body.Enabled == 'on') {
         Enabled = true;
@@ -60,6 +64,10 @@ exports.post_update_user = function (req, res) {
         Enabled: Enabled,
         role: req.body.role
     };
+
+    if (currentUser.role === "User") {
+        res.redirect('login');
+    }
 
     if (req.body.password) {
         updateData.password = user.generateHash(req.body.password);
