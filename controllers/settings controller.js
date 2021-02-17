@@ -73,6 +73,7 @@ exports.get_foods_update = function (req, res) {
     if (currentUser.role === "Admin") {
         Food.findOne({ _id: req.query._id }, function (err, food) {
 
+            
             if (err) {
                 console.log(err);
             } else {

@@ -16,15 +16,13 @@ const Sentry = require('@sentry/node');
 var fs = require('fs');
 var path = require('path');
 
-Sentry.init({ dsn: '__https://307cfb0457604717a5837e8db4d1766f@sentry.dev-squared.com/34__' });
-
-//Sentry request handler
-app.use(Sentry.Handlers.requestHandler());
-
+Sentry.init({ dsn: 'https://307cfb0457604717a5837e8db4d1766f@sentry.dev-squared.com/34' });
 
 require('dotenv').config({path: __dirname + '/.env'});
 
 var app = express();
+//Sentry request handler
+app.use(Sentry.Handlers.requestHandler());
 require('./config/passport')(passport); //tells app to use the passport file
 
 mongoose.connect(process.env['DATABASE'],{ useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
@@ -75,5 +73,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 module.exports = app;
