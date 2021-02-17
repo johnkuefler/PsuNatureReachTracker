@@ -12,8 +12,14 @@ var passport = require('passport');
 var flash    = require('connect-flash');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+const Sentry = require('@sentry/node');
 var fs = require('fs');
 var path = require('path');
+
+Sentry.init({ dsn: '__https://307cfb0457604717a5837e8db4d1766f@sentry.dev-squared.com/34__' });
+
+//Sentry request handler
+app.use(Sentry.Handlers.requestHandler());
 
 
 require('dotenv').config({path: __dirname + '/.env'});
@@ -50,6 +56,9 @@ app.use('/', indexRouter);
 app.use('/settings', settingsRouter);
 app.use('/feedings', feedingsRouter);
 app.use('/login', loginRouter);
+
+//Sentry error handler
+app.use(Sentry.Handlers.errorHandler());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
