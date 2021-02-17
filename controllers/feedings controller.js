@@ -3,8 +3,11 @@ const Feeding = require('../models/feeding');
 const Medication = require('../models/medication');
 const Food = require('../models/food');
 const excel = require('exceljs');
+const Sentry = require("@sentry/node");
+
 
 exports.get_feedings = function (req, res) {
+
     Feeding.find({}, function (err, feedings) {
         if (err) {
             console.error(err);
