@@ -1,6 +1,7 @@
 const Instruction = require('../models/instruction');
 const User = require('../models/user');
 const Sentry = require("@sentry/node");
+const { schema } = require('../models/instruction');
 
 exports.get_index = function (req, res) {
     Instruction.find({}, function (err, instructions) {
@@ -25,11 +26,12 @@ exports.post_reset = function (req, res) {
 
     console.log(updateData);
 
-    User.findOneAndUpdate({ _id: res.locals.user._id }, updateData, function (err, data) {
-        if (err) {
-            Sentry.captureException(err);
-        } else {
-            res.redirect('/login');
-        }
-    });
+
+        User.findOneAndUpdate({ _id: res.locals.user._id }, updateData, function (err, data) {
+            if (err) {
+                Sentry.captureException(err);
+            } else {
+                res.redirect('/login');
+            }
+        });  
 }
