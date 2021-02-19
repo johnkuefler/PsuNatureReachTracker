@@ -1,10 +1,11 @@
 const Instruction = require('../models/instruction');
 const excel = require('exceljs');
+const Sentry = require("@sentry/node");
 
 exports.get_instructions = function (req, res) {
         Instruction.find({}, function (err, instructions) {
             if (err) {
-                console.error(err);
+                Sentry.captureException(err);
             } else {
                 res.render('settings/instructions/instructions', { data: instructions, title: 'Instructions' });
             }
@@ -37,7 +38,7 @@ exports.post_create_instruction = function (req, res) {
     
         newInstruction.save(function (err) {
             if (err) {
-                console.log(err);
+                Sentry.captureException(err);
             } else {
                 console.log('Instruction saved');
                 res.redirect('/settings/instructions');
@@ -49,9 +50,8 @@ exports.get_instruction_update = function (req, res) {
     let currentUser = res.locals.user;
     if (currentUser.role === "Admin") {
         Instruction.findOne({ _id: req.query._id }, function (err, instruction) {
-
             if (err) {
-                console.log(err);
+                Sentry.captureException(err);
             } else {
                 res.render('settings/instructions/instructionsupdate', { data: instruction, title: 'Update Instruction' });
             }
@@ -77,8 +77,7 @@ exports.post_instruction_update = function (req, res) {
 
     Instruction.findOneAndUpdate({ _id: req.body.id }, updateInstruction, function (err, data) {
         if (err) {
-            // handle error
-            console.log(err);
+            Sentry.captureException(err);
         } else {
             res.redirect('/settings/instructions');
         }
@@ -88,7 +87,7 @@ exports.post_instruction_update = function (req, res) {
 exports.delete_instruction = function (req, res) {
     Instruction.findOneAndDelete({ _id: req.query._id }, function (err) {
         if (err) {
-            console.log(err);
+            Sentry.captureException(err);
         } else {
             res.redirect('/settings/instructions')
         }

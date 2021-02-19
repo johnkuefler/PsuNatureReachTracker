@@ -10,7 +10,7 @@ exports.get_feedings = function (req, res) {
 
     Feeding.find({}, function (err, feedings) {
         if (err) {
-            console.error(err);
+            Sentry.captureException(err);
         } else {
             res.render('feedings/feedings', { data: feedings, title: 'Feedings' });
         }
@@ -20,7 +20,7 @@ exports.get_feedings = function (req, res) {
 exports.get_export_feedings_page = function (req, res) {
     Feeding.find({}, function (err, feedings) {
         if (err) {
-            console.error(err);
+            Sentry.captureException(err);
         } else {
             res.render('feedings/exportfeedings', { data: feedings });
         }
@@ -150,7 +150,7 @@ exports.get_feedings_update = async function (req, res) {
 
     Feeding.findOne({ _id: req.query._id }, function (err, feedings) {
         if (err) {
-            console.log(err);
+            Sentry.captureException(err);
         } else {
             res.render('feedings/feedingsupdate', { data: feedings, birds: birds, foods: foods, meds: meds, title: 'Update Feeding' });
         }
@@ -186,7 +186,7 @@ exports.post_feedings_create = function (req, res) {
     });
     newFeedings.save(function (err) {
         if (err) {
-            console.log(err);
+            Sentry.captureException(err);
         } else {
             console.log('Feeding saved');
             res.redirect('/feedings');
@@ -202,7 +202,7 @@ exports.post_feedings_update = function (req, res) {
 
     newFeedings.save(function (err) {
         if (err) {
-            console.log(err);
+            Sentry.captureException(err);
         } else {
             console.log('Feedings saved');
             res.redirect('/feedings');
@@ -213,7 +213,7 @@ exports.post_feedings_update = function (req, res) {
 exports.delete_feedings = function (req, res) {
     Feeding.findOneAndDelete({ _id: req.query._id }, function (err) {
         if (err) {
-            console.log(err);
+            Sentry.captureException(err);
         } else {
             res.redirect('/feedings')
         }
@@ -245,8 +245,7 @@ exports.post_feedings_update = function (req, res) {
     console.log(updateData);
     Feeding.findOneAndUpdate({ _id: req.body.id }, updateData, function (err, data) {
         if (err) {
-            // handle error
-            console.log(err);
+            Sentry.captureException(err);
         } else {
             res.redirect('/feedings');
         }
