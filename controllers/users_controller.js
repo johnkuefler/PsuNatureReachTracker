@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Sentry = require("@sentry/node");
 var fs = require('fs');
 var path = require('path');
 var multer = require('multer');
@@ -9,13 +10,12 @@ exports.get_users = function (req, res) {
     if (currentUser.role === "Admin") {
         User.find({}, function (err, users) {
             if (err) {
-                console.error(err);
+                Sentry.captureException(err);
             } else {
                 res.render('settings/users/users', { data: users });
             }
         })
     } else {
-        //res.render('error');
         res.redirect('/login');
         console.log('You do not have permission to this page.')
     }
@@ -26,7 +26,6 @@ exports.get_create_user = function (req, res) {
     if (currentUser.role === "Admin") {
         res.render('settings/users/userscreate');
     } else {
-        //res.render('error');
         res.redirect('/login');
         console.log('You do not have permission to this page.')
     }
@@ -38,7 +37,7 @@ exports.get_update_user = function (req, res) {
         User.findOne({ _id: req.query._id }, function (err, user) {
 
             if (err) {
-                console.log(err);
+                Sentry.captureException(err);
             } else {
                 res.render('settings/users/usersupdate', { data: user, title: 'Update User' });
             }
@@ -77,8 +76,7 @@ exports.post_update_user = function (req, res) {
     console.log(updateData);
     User.findOneAndUpdate({ _id: req.body.id }, updateData, function (err, data) {
         if (err) {
-            // handle error
-            console.log(err);
+            Sentry.captureException(err);
         } else {
             res.redirect('/settings/users');
         }
@@ -105,7 +103,7 @@ exports.post_create_user = function (req, res) {
 
     user.save(function (err) {
         if (err) {
-            console.log(err);
+            Sentry.captureException(err);
         } else {
             console.log('User saved!');
             res.redirect('/settings/users');
@@ -147,7 +145,7 @@ exports.get_all_export_users = async function(req, res) {
 exports.delete_user = function (req, res) {
     User.findOneAndDelete({ _id: req.query._id }, function (err) {
         if (err) {
-            console.log(err);
+            Sentry.captureException(err);
         } else {
             res.redirect('/settings/users')
         }
@@ -172,8 +170,7 @@ exports.put_update_user_image = function (req, res) {
 
     User.findOneAndUpdate({ _id: req.body.id }, updateUser, function (err, data) {
         if (err) {
-            // handle error
-            console.log(err);
+            Sentry.captureException(err);
         } else {
             console.log("image uploaded successfully");
             res.redirect('/settings/users');
@@ -186,7 +183,7 @@ exports.get_update_user_image = function (req, res) {
     if (currentUser.role === "Admin") {
         User.findOne({_id: req.query._id}, function (err, user) {
             if (err) {
-                console.error(err);
+                Sentry.captureException(err);
             } else {
                 res.render('settings/users/addprofilepicture', { data: user });
             }

@@ -3,11 +3,12 @@ const Food = require('../models/food');
 const Medication = require('../models/medication');
 const excel = require('exceljs');
 const User = require('../models/user');
+const Sentry = require("@sentry/node");
 var fs = require('fs');
 var path = require('path');
 var multer = require('multer');
 
-// Main get pages
+
 exports.get_settings = function (req, res) {
     let currentUser = res.locals.user;
     if (currentUser.role === "Admin") {
@@ -18,7 +19,7 @@ exports.get_settings = function (req, res) {
     }
 }
 
-// Create get pages
+
 exports.get_create_bird = function (req, res) {
     let currentUser = res.locals.user;
     if (currentUser.role === "Admin") {
@@ -49,15 +50,14 @@ exports.get_create_medication = function (req, res) {
     }
 }
 
-// Update get pages
+
 
 exports.get_birds_update = function (req, res) {
     let currentUser = res.locals.user;
     if (currentUser.role === "Admin") {
         Bird.findOne({ _id: req.query._id }, function (err, bird) {
-
             if (err) {
-                console.log(err);
+                Sentry.captureException(err);
             } else {
                 res.render('settings/birds/birdsupdate', { data: bird, title: 'Update Bird' });
             }
@@ -72,10 +72,8 @@ exports.get_foods_update = function (req, res) {
     let currentUser = res.locals.user;
     if (currentUser.role === "Admin") {
         Food.findOne({ _id: req.query._id }, function (err, food) {
-
-            
             if (err) {
-                console.log(err);
+                Sentry.captureException(err);
             } else {
                 res.render('settings/foods/foodsupdate', { data: food, title: 'Update Food' });
             }
@@ -90,9 +88,8 @@ exports.get_meds_update = function (req, res) {
     let currentUser = res.locals.user;
     if (currentUser.role === "Admin") {
         Medication.findOne({ _id: req.query._id }, function (err, med) {
-
             if (err) {
-                console.log(err);
+                Sentry.captureException(err);
             } else {
                 res.render('settings/meds/medsupdate', { data: med, title: 'Update Medication' });
             }
@@ -103,7 +100,7 @@ exports.get_meds_update = function (req, res) {
     }
 }
 
-//Update post pages
+
 exports.post_birds_update = function (req, res) {
     let enabled = false;
     if (req.body.enabled == 'on') {
@@ -118,8 +115,7 @@ exports.post_birds_update = function (req, res) {
     console.log(updateData);
     Bird.findOneAndUpdate({ _id: req.body.id }, updateData, function (err, data) {
         if (err) {
-            // handle error
-            console.log(err);
+            Sentry.captureException(err);
         } else {
             res.redirect('/settings/birds');
         }
@@ -134,8 +130,7 @@ exports.post_foods_update = function (req, res) {
     console.log(updateData);
     Food.findOneAndUpdate({ _id: req.body.id }, updateData, function (err, data) {
         if (err) {
-            // handle error
-            console.log(err);
+            Sentry.captureException(err);
         } else {
             res.redirect('/settings/foods');
         }
@@ -150,20 +145,18 @@ exports.post_meds_update = function (req, res) {
     console.log(updateData);
     Medication.findOneAndUpdate({ _id: req.body.id }, updateData, function (err, data) {
         if (err) {
-            // handle error
-            console.log(err);
+            Sentry.captureException(err);
         } else {
             res.redirect('/settings/meds');
         }
     });
 };
 
-// Exports for data
 
 exports.get_birds = function (req, res) {
     Bird.find({}, function (err, birds) {
         if (err) {
-            console.error(err);
+            Sentry.captureException(err);
         } else {
             res.render('settings/birds/birds', { data: birds });
         }
@@ -186,7 +179,7 @@ bird.animalImage.contentType = "";
 
     bird.save(function (err) {
         if (err) {
-            console.log(err);
+            Sentry.captureException(err);
         } else {
             console.log('Bird saved');
             res.redirect('/settings/birds');
@@ -206,7 +199,7 @@ food.foodImage.contentType = "";
 
     food.save(function (err) {
         if (err) {
-            console.log(err);
+            Sentry.captureException(err);
         } else {
             console.log('Food saved');
             res.redirect('/settings/foods');
@@ -227,7 +220,7 @@ console.log(medication);
 
     medication.save(function (err) {
         if (err) {
-            console.log(err);
+            Sentry.captureException(err);
         } else {
             console.log('Medication saved');
             res.redirect('/settings/meds');
@@ -240,7 +233,7 @@ exports.get_birds = function (req, res) {
     if (currentUser.role === "Admin") {
         Bird.find({}, function (err, birds) {
             if (err) {
-                console.error(err);
+                Sentry.captureException(err);
             } else {
                 res.render('settings/birds/birds', { data: birds });
             }
@@ -256,7 +249,7 @@ exports.get_foods = function (req, res) {
     if (currentUser.role === "Admin") {
         Food.find({}, function (err, foods) {
             if (err) {
-                console.error(err);
+                Sentry.captureException(err);
             } else {
                 res.render('settings/foods/foods', { data: foods });
             }
@@ -272,7 +265,7 @@ exports.get_meds = function (req, res) {
     if (currentUser.role === "Admin") {
         Medication.find({}, function (err, meds) {
             if (err) {
-                console.error(err);
+                Sentry.captureException(err);
             } else {
                 res.render('settings/meds/meds', { data: meds });
             }
@@ -286,7 +279,7 @@ exports.get_meds = function (req, res) {
 exports.delete_bird = function (req, res) {
     Bird.findOneAndDelete({ _id: req.query._id }, function (err) {
         if (err) {
-            console.log(err);
+            Sentry.captureException(err);
         } else {
             res.redirect('/settings/birds')
         }
@@ -296,7 +289,7 @@ exports.delete_bird = function (req, res) {
 exports.delete_food = function (req, res) {
     Food.findOneAndDelete({ _id: req.query._id }, function (err) {
         if (err) {
-            console.log(err);
+            Sentry.captureException(err);
         } else {
             res.redirect('/settings/foods')
         }
@@ -306,7 +299,7 @@ exports.delete_food = function (req, res) {
 exports.delete_med = function (req, res) {
     Medication.findOneAndDelete({ _id: req.query._id }, function (err) {
         if (err) {
-            console.log(err);
+            Sentry.captureException(err);
         } else {
             res.redirect('/settings/meds')
         }
@@ -410,8 +403,7 @@ exports.put_update_food_image = function (req, res) {
 
     Food.findOneAndUpdate({ _id: req.body.id }, updateFood, function (err, data) {
         if (err) {
-            // handle error
-            console.log(err);
+            Sentry.captureException(err);
         } else {
             console.log("image uploaded successfully");
             res.redirect('/settings/foods');
@@ -425,7 +417,7 @@ exports.get_update_food_image = function (req, res) {
     if (currentUser.role === "Admin") {
         Food.findOne({_id: req.query._id}, function (err, foods) {
             if (err) {
-                console.error(err);
+                Sentry.captureException(err);
             } else {
                 res.render('settings/foods/addfoodpicture', { data: foods });
             }
@@ -455,8 +447,7 @@ exports.put_update_med_image = function (req, res) {
 
     Medication.findOneAndUpdate({ _id: req.body.id }, updateMedication, function (err, data) {
         if (err) {
-            // handle error
-            console.log(err);
+            Sentry.captureException(err);
         } else {
             console.log("image uploaded successfully");
             res.redirect('/settings/meds');
@@ -470,7 +461,7 @@ exports.get_update_med_image = function (req, res) {
     if (currentUser.role === "Admin") {
         Medication.findOne({_id: req.query._id}, function (err, meds) {
             if (err) {
-                console.error(err);
+                Sentry.captureException(err);
             } else {
                 res.render('settings/meds/addmedicationpicture', { data: meds });
             }
@@ -500,8 +491,7 @@ exports.put_update_bird_image = function (req, res) {
 
     Bird.findOneAndUpdate({ _id: req.body.id }, updateAnimal, function (err, data) {
         if (err) {
-            // handle error
-            console.log(err);
+            Sentry.captureException(err);
         } else {
             console.log("image uploaded successfully");
             res.redirect('/settings/birds');
@@ -515,7 +505,7 @@ exports.get_update_bird_image = function (req, res) {
     if (currentUser.role === "Admin") {
         Bird.findOne({_id: req.query._id}, function (err, birds) {
             if (err) {
-                console.error(err);
+                Sentry.captureException(err);
             } else {
                 res.render('settings/birds/addanimalpicture', { data: birds });
             }
