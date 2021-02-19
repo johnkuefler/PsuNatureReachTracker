@@ -7,7 +7,6 @@ const Sentry = require("@sentry/node");
 
 
 exports.get_feedings = function (req, res) {
-
     Feeding.find({}, function (err, feedings) {
         if (err) {
             Sentry.captureException(err);
@@ -167,7 +166,6 @@ exports.get_feedings_create = async function (req, res) {
 }
 
 exports.post_feedings_create = function (req, res) {
-   let currentUser = res.locals.user;
     let newFeedings = new Feeding({
         Date: req.body.Date,
         Bird: req.body.Bird,
