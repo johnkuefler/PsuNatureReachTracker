@@ -35,8 +35,8 @@
               <td>Leftover Food (g)</td>
               <td>Medicine</td>
               <td>Goal Weight (g)</td>
-              <td>Weather Conditions</td>
               <td>Actual Weight (g)</td>
+              <td>Weather Conditions</td>
               <td>
                 Daily High Temperature (°F)
               </td>
@@ -52,7 +52,7 @@
           <% for(var i=0; i < data.length; i++) { %>
             <tr>
               <td>
-                <%=data[i].Date.toLocaleDateString("en-US", { hour: '2-digit' , minute: '2-digit' }) %>
+                <%=data[i].Date.toLocaleDateString("en-US", { hour: '2-digit' , minute: '2-digit', timeZone: "America/Chicago" }) %>
               </td>
               <td>
                 <%=data[i].Bird%>
@@ -61,29 +61,29 @@
                 <%=data[i].Food%>
               </td>
               <td>
-                <%=data[i].AmountFed%> g
+                <%=data[i].AmountFed%> 
               </td>
               <td>
-                <%=data[i].LeftoverFood%> g
+                <%=data[i].LeftoverFood%> 
               </td>
               <td>
                 <%=data[i].Medicine%>
               </td>
               <td>
-                <%=data[i].GoalWeight%> g
+                <%=data[i].GoalWeight%> 
               </td>
               <td>
-                <%=data[i].ActualWeight%> g
+                <%=data[i].ActualWeight%> 
               </td>
               <td>
                 <%=data[i].WeatherConditions%>
               </td>
               <td>
-                <%=data[i].DailyHighTemperature%> °F
+                <%=data[i].DailyHighTemperature%> 
               </td>
               
               <td>
-                <%=data[i].DailyLowTemperature%> °F
+                <%=data[i].DailyLowTemperature%> 
               </td>
               <td>
                 <%=data[i].Feeder%>

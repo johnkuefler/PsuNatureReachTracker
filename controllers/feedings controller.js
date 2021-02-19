@@ -38,7 +38,7 @@ let displayFeedings = [];
 
 for (let i=0; i<feedings.length; i++) {
     displayFeedings.push({
-        Date: feedings[i].Date.toLocaleString("en-US", {timeZone: 'UTC'}),
+        Date: feedings[i].Date.toLocaleString("en-US", {timeZone: 'America/Chicago'}),
         Bird: feedings[i].Bird,
         Food: feedings[i].Food,
         Medicine: feedings[i].Medicine,
@@ -95,7 +95,7 @@ exports.get_all_export_feedings = async function(req, res) {
 
     for (let i=0; i<feedings.length; i++) {
         displayFeedings.push({
-            Date: feedings[i].Date.toLocaleString("en-US", {timeZone: "UTC"}),
+            Date: feedings[i].Date.toLocaleString("en-US", {timeZone: "America/Chicago"}),
             Bird: feedings[i].Bird,
             Food: feedings[i].Food,
             Medicine: feedings[i].Medicine,
@@ -167,7 +167,7 @@ exports.get_feedings_create = async function (req, res) {
 
 exports.post_feedings_create = function (req, res) {
     let newFeedings = new Feeding({
-        Date: req.body.Date,
+        Date: req.body.Date.toLocaleString("en-US", {timeZone: "America/Chicago"}),
         Bird: req.body.Bird,
         Food: req.body.Food,
         AmountFed: req.body.AmountFed,
@@ -182,6 +182,9 @@ exports.post_feedings_create = function (req, res) {
         GeneralComments: req.body.GeneralComments,
         TrainingComments: req.body.TrainingComments
     });
+
+    console.log(newFeedings);
+
     newFeedings.save(function (err) {
         if (err) {
             Sentry.captureException(err);
