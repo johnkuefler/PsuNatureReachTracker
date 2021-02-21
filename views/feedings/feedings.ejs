@@ -52,7 +52,7 @@
           <% for(var i=0; i < data.length; i++) { %>
             <tr>
               <td>
-                <%=data[i].Date %>
+                <%=data[i].Date.toLocaleDateString("en-US", { hour: '2-digit' , minute: '2-digit', timeZone: "UTC" }) %>
               </td>
               <td>
                 <%=data[i].Bird%>
