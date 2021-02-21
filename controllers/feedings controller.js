@@ -188,6 +188,7 @@ exports.post_feedings_create = function (req, res) {
     newFeedings.save(function (err) {
         if (err) {
             Sentry.captureException(err);
+            res.render('error',{message:'Unable to create feeding',error: err});
         } else {
             console.log('Feeding saved');
             res.redirect('/feedings');
