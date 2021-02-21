@@ -167,7 +167,7 @@ exports.get_feedings_create = async function (req, res) {
 
 exports.post_feedings_create = function (req, res) {
     let newFeedings = new Feeding({
-        Date: req.body.Date.toLocaleString("en-US", {timeZone: "America/Chicago"}),
+        Date: req.body.Date,
         Bird: req.body.Bird,
         Food: req.body.Food,
         AmountFed: req.body.AmountFed,
