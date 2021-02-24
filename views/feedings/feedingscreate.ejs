@@ -22,7 +22,7 @@
                     </select>
                 </div>
 
-                <div class="form-group col-md-4 col-sm-12">
+                <!-- <div class="form-group col-md-4 col-sm-12">
                     <label>Food</label>
                     <select required class="form-control" name="Food">
                         <option value="" disabled selected></option>
@@ -32,6 +32,14 @@
                         </option>
                         <% } %>
                     </select>
+                </div> -->
+
+                <div class="form-group col-md-4 col-sm-12">
+                    <label>Food</label><br>
+
+                        <% for(var i=0; i<foods.length; i++) { %>
+                            <input type="checkbox" value="<%=foods[i].name%>" name="Food"> <%=foods[i].name%><br>
+                            <% } %>
                 </div>
 
                 <div class="form-group col-md-4 col-sm-12">
@@ -54,7 +62,15 @@
                         </option>
                         <% } %>
                     </select>
-                </div>
+                </div> 
+
+                <!-- <div class="form-group col-md-4 col-sm-12">
+                    <label>Medicine (Optional)</label><br>
+
+                        <% for(var i=0; i<foods.length; i++) { %>
+                            <input type="checkbox" value="<%=foods[i].name%>" name="Medicine"> <%=foods[i].name%><br>
+                            <% } %>
+                </div> -->
 
                 <div class="form-group col-md-4 col-sm-12">
                     <label>Goal Weight (g) (Optional)</label>
