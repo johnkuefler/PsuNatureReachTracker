@@ -172,7 +172,7 @@ exports.post_feedings_create = function (req, res) {
         Food: req.body.Food.join(", "),
         AmountFed: req.body.AmountFed,
         LeftoverFood: req.body.LeftoverFood,
-        Medicine: req.body.Medicine,
+        Medicine: req.body.Medicine.join(", "),
         GoalWeight: req.body.GoalWeight,
         ActualWeight: req.body.ActualWeight,
         WeatherConditions: req.body.WeatherConditions,
