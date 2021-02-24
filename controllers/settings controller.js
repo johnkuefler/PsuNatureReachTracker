@@ -188,6 +188,9 @@ bird.animalImage.contentType = "";
 }
 
 exports.post_create_food = function (req, res) {
+    let enabled = true;
+
+
 
 const food = new Food();
 

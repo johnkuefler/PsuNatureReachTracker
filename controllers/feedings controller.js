@@ -169,10 +169,8 @@ exports.post_feedings_create = function (req, res) {
     let newFeedings = new Feeding({
         Date: req.body.Date,
         Bird: req.body.Bird,
-        Food: req.body.Food.join(", "),
         AmountFed: req.body.AmountFed,
         LeftoverFood: req.body.LeftoverFood,
-        Medicine: req.body.Medicine.join(", "),
         GoalWeight: req.body.GoalWeight,
         ActualWeight: req.body.ActualWeight,
         WeatherConditions: req.body.WeatherConditions,
@@ -182,6 +180,18 @@ exports.post_feedings_create = function (req, res) {
         GeneralComments: req.body.GeneralComments,
         TrainingComments: req.body.TrainingComments
     });
+
+    if (Array.isArray(req.body.Food)) {
+        newFeedings.Food = req.body.Food.join(", ");
+    } else {
+        newFeedings.Food = req.body.Food;
+    }
+
+    if (Array.isArray(req.body.Medicine)) {
+        newFeedings.Medicine = req.body.Medicine.join(", ");
+    } else {
+        newFeedings.Medicine = req.body.Medicine;
+    }
 
     console.log(newFeedings);
 
@@ -223,18 +233,18 @@ exports.delete_feedings = function (req, res) {
 }
 
 exports.post_feedings_update = function (req, res) {
-    let enabled = false;
-    if (req.body.enabled == 'on') {
-        enabled = true;
-    }
+    let enabled = true;
+    // if (req.body.enabled == 'on') {
+    //     enabled = true;
+    // }
 
     const updateData = {
         Date: req.body.Date,
         Bird: req.body.Bird,
-        Food: req.body.Food,
+        Food: req.body.Food.join(", "),
         Amountfed: req.body.AmountFed,
         LeftoverFood: req.body.LeftoverFood,
-        Medicine: req.body.Medicine,
+        Medicine: req.body.Medicine.join(", "),
         GoalWeight: req.body.GoalWeight,
         ActualWeight: req.body.ActualWeight,
         WeatherConditions: req.body.WeatherConditions,

@@ -22,21 +22,8 @@
                     </select>
                 </div>
 
-                <!-- <div class="form-group col-md-4 col-sm-12">
-                    <label>Food</label>
-                    <select required class="form-control" name="Food">
-                        <option value="" disabled selected></option>
-                        <% for(var i=0; i<foods.length; i++) { %>
-                        <option value="<%=foods[i].name%>">
-                            <%=foods[i].name%>
-                        </option>
-                        <% } %>
-                    </select>
-                </div> -->
-
                 <div class="form-group col-md-4 col-sm-12">
                     <label>Food</label><br>
-
                         <% for(var i=0; i<foods.length; i++) { %>
                             <input type="checkbox" value="<%=foods[i].name%>" name="Food"> <%=foods[i].name%><br>
                             <% } %>
@@ -50,23 +37,10 @@
                 <div class="form-group col-md-4 col-sm-12">
                     <label>Leftover Food (g)</label>
                     <input required type="text" class="form-control" name="LeftoverFood">
-                </div>
-
-                <div class="form-group col-md-4 col-sm-12">
-                    <label>Medicine (Optional)</label>
-                    <select class="form-control" name="Medicine">
-                        <option value="" disabled selected></option>
-                        <% for(var i=0; i<meds.length; i++) { %>
-                        <option value="<%=meds[i].name%>">
-                            <%=meds[i].name%>
-                        </option>
-                        <% } %>
-                    </select>
-                </div> 
+                </div>         
 
                  <div class="form-group col-md-4 col-sm-12">
                     <label>Medicine (Optional)</label><br>
-
                         <% for(var i=0; i<meds.length; i++) { %>
                             <input type="checkbox" value="<%=meds[i].name%>" name="Medicine"> <%=meds[i].name%><br>
                             <% } %>
