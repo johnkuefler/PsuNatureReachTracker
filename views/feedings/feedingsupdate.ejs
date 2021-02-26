@@ -44,7 +44,7 @@
                     <div class="form-group col-md-4 col-sm-12">
                         <label>Food</label><br>
                             <% for(var i=0; i<foods.length; i++) { %>
-                                <% if (data.Food) { %>
+                                <% if (data.Food !== '' ) { %>
                                 <input type="checkbox" value="<%=foods[i].name%>" name="Food" checked/> <%=foods[i].name%><br>
                                 <% } else { %>
                                     <input type="checkbox" value="<%=foods[i].name%>" name="Food"/> <%=foods[i].name%><br>
