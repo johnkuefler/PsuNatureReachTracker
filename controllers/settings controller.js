@@ -58,6 +58,7 @@ exports.get_birds_update = function (req, res) {
         Bird.findOne({ _id: req.query._id }, function (err, bird) {
             if (err) {
                 Sentry.captureException(err);
+                res.render('error',{message:'Unable to fetch animal update page',error: err});
             } else {
                 res.render('settings/birds/birdsupdate', { data: bird, title: 'Update Bird' });
             }
@@ -74,6 +75,7 @@ exports.get_foods_update = function (req, res) {
         Food.findOne({ _id: req.query._id }, function (err, food) {
             if (err) {
                 Sentry.captureException(err);
+                res.render('error',{message:'Unable to fetch food update page',error: err});
             } else {
                 res.render('settings/foods/foodsupdate', { data: food, title: 'Update Food' });
             }
@@ -90,6 +92,7 @@ exports.get_meds_update = function (req, res) {
         Medication.findOne({ _id: req.query._id }, function (err, med) {
             if (err) {
                 Sentry.captureException(err);
+                res.render('error',{message:'Unable to fetch medicines update page',error: err});
             } else {
                 res.render('settings/meds/medsupdate', { data: med, title: 'Update Medication' });
             }
@@ -116,6 +119,7 @@ exports.post_birds_update = function (req, res) {
     Bird.findOneAndUpdate({ _id: req.body.id }, updateData, function (err, data) {
         if (err) {
             Sentry.captureException(err);
+            res.render('error',{message:'Unable to update animal',error: err});
         } else {
             res.redirect('/settings/birds');
         }
@@ -131,6 +135,7 @@ exports.post_foods_update = function (req, res) {
     Food.findOneAndUpdate({ _id: req.body.id }, updateData, function (err, data) {
         if (err) {
             Sentry.captureException(err);
+            res.render('error',{message:'Unable to update food',error: err});
         } else {
             res.redirect('/settings/foods');
         }
@@ -146,6 +151,7 @@ exports.post_meds_update = function (req, res) {
     Medication.findOneAndUpdate({ _id: req.body.id }, updateData, function (err, data) {
         if (err) {
             Sentry.captureException(err);
+            res.render('error',{message:'Unable to update medicine',error: err});
         } else {
             res.redirect('/settings/meds');
         }
@@ -157,6 +163,7 @@ exports.get_birds = function (req, res) {
     Bird.find({}, function (err, birds) {
         if (err) {
             Sentry.captureException(err);
+            res.render('error',{message:'Unable to fetch animal page',error: err});
         } else {
             res.render('settings/birds/birds', { data: birds });
         }
@@ -180,6 +187,7 @@ bird.animalImage.contentType = "";
     bird.save(function (err) {
         if (err) {
             Sentry.captureException(err);
+            res.render('error',{message:'Unable to create animal',error: err});
         } else {
             console.log('Bird saved');
             res.redirect('/settings/birds');
@@ -199,6 +207,7 @@ food.foodImage.contentType = "";
     food.save(function (err) {
         if (err) {
             Sentry.captureException(err);
+            res.render('error',{message:'Unable to create food',error: err});
         } else {
             console.log('Food saved');
             res.redirect('/settings/foods');
@@ -218,6 +227,7 @@ console.log(medication);
     medication.save(function (err) {
         if (err) {
             Sentry.captureException(err);
+            res.render('error',{message:'Unable to create medicine',error: err});
         } else {
             console.log('Medication saved');
             res.redirect('/settings/meds');
@@ -231,6 +241,7 @@ exports.get_birds = function (req, res) {
         Bird.find({}, function (err, birds) {
             if (err) {
                 Sentry.captureException(err);
+                res.render('error',{message:'Unable to fetch animal page',error: err});
             } else {
                 res.render('settings/birds/birds', { data: birds });
             }
@@ -247,6 +258,7 @@ exports.get_foods = function (req, res) {
         Food.find({}, function (err, foods) {
             if (err) {
                 Sentry.captureException(err);
+                res.render('error',{message:'Unable to fetch food page',error: err});
             } else {
                 res.render('settings/foods/foods', { data: foods });
             }
@@ -263,6 +275,7 @@ exports.get_meds = function (req, res) {
         Medication.find({}, function (err, meds) {
             if (err) {
                 Sentry.captureException(err);
+                res.render('error',{message:'Unable to fetch medicine page',error: err});
             } else {
                 res.render('settings/meds/meds', { data: meds });
             }
@@ -277,6 +290,7 @@ exports.delete_bird = function (req, res) {
     Bird.findOneAndDelete({ _id: req.query._id }, function (err) {
         if (err) {
             Sentry.captureException(err);
+            res.render('error',{message:'Unable to delete animal',error: err});
         } else {
             res.redirect('/settings/birds')
         }
@@ -287,6 +301,7 @@ exports.delete_food = function (req, res) {
     Food.findOneAndDelete({ _id: req.query._id }, function (err) {
         if (err) {
             Sentry.captureException(err);
+            res.render('error',{message:'Unable to delete food',error: err});
         } else {
             res.redirect('/settings/foods')
         }
@@ -297,6 +312,7 @@ exports.delete_med = function (req, res) {
     Medication.findOneAndDelete({ _id: req.query._id }, function (err) {
         if (err) {
             Sentry.captureException(err);
+            res.render('error',{message:'Unable to delete medicine',error: err});
         } else {
             res.redirect('/settings/meds')
         }
@@ -401,6 +417,7 @@ exports.put_update_food_image = function (req, res) {
     Food.findOneAndUpdate({ _id: req.body.id }, updateFood, function (err, data) {
         if (err) {
             Sentry.captureException(err);
+            res.render('error',{message:'Unable to update food image',error: err});
         } else {
             console.log("image uploaded successfully");
             res.redirect('/settings/foods');
@@ -415,6 +432,7 @@ exports.get_update_food_image = function (req, res) {
         Food.findOne({_id: req.query._id}, function (err, foods) {
             if (err) {
                 Sentry.captureException(err);
+                res.render('error',{message:'Unable to fetch update food image page',error: err});
             } else {
                 res.render('settings/foods/addfoodpicture', { data: foods });
             }
@@ -445,6 +463,7 @@ exports.put_update_med_image = function (req, res) {
     Medication.findOneAndUpdate({ _id: req.body.id }, updateMedication, function (err, data) {
         if (err) {
             Sentry.captureException(err);
+            res.render('error',{message:'Unable to update medicine image',error: err});
         } else {
             console.log("image uploaded successfully");
             res.redirect('/settings/meds');
@@ -459,6 +478,7 @@ exports.get_update_med_image = function (req, res) {
         Medication.findOne({_id: req.query._id}, function (err, meds) {
             if (err) {
                 Sentry.captureException(err);
+                res.render('error',{message:'Unable to fetch update medicine page',error: err});
             } else {
                 res.render('settings/meds/addmedicationpicture', { data: meds });
             }
@@ -489,6 +509,7 @@ exports.put_update_bird_image = function (req, res) {
     Bird.findOneAndUpdate({ _id: req.body.id }, updateAnimal, function (err, data) {
         if (err) {
             Sentry.captureException(err);
+            res.render('error',{message:'Unable to update animal image',error: err});
         } else {
             console.log("image uploaded successfully");
             res.redirect('/settings/birds');
@@ -503,6 +524,7 @@ exports.get_update_bird_image = function (req, res) {
         Bird.findOne({_id: req.query._id}, function (err, birds) {
             if (err) {
                 Sentry.captureException(err);
+                res.render('error',{message:'Unable to fetch animal image page',error: err});
             } else {
                 res.render('settings/birds/addanimalpicture', { data: birds });
             }
