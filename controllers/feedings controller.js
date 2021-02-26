@@ -151,7 +151,28 @@ exports.get_feedings_update = async function (req, res) {
         if (err) {
             Sentry.captureException(err);
         } else {
-            res.render('feedings/feedingsupdate', { data: feedings, birds: birds, foods: foods, meds: meds, title: 'Update Feeding' });
+
+            let medicine = [];
+            let food = [];
+
+            if (feedings.Medicine != null) {
+                medicine = feedings.Medicine.split(", ");
+            }
+
+            if (feedings.Food != null) {
+                food = feedings.Food.split(", ");
+            }
+            
+            res.render('feedings/feedingsupdate', 
+            { 
+                data: feedings, 
+                feedingFoods: food,  
+                feedingMedicines: medicine,
+                birds: birds, 
+                foods: foods, 
+                meds: meds, 
+                title: 'Update Feeding' 
+            });
         }
     });
 }
@@ -169,10 +190,8 @@ exports.post_feedings_create = function (req, res) {
     let newFeedings = new Feeding({
         Date: req.body.Date,
         Bird: req.body.Bird,
-        Food: req.body.Food,
         AmountFed: req.body.AmountFed,
         LeftoverFood: req.body.LeftoverFood,
-        Medicine: req.body.Medicine,
         GoalWeight: req.body.GoalWeight,
         ActualWeight: req.body.ActualWeight,
         WeatherConditions: req.body.WeatherConditions,
@@ -182,6 +201,18 @@ exports.post_feedings_create = function (req, res) {
         GeneralComments: req.body.GeneralComments,
         TrainingComments: req.body.TrainingComments
     });
+
+    if (Array.isArray(req.body.Food)) {
+        newFeedings.Food = req.body.Food.join(", ");
+    } else {
+        newFeedings.Food = req.body.Food;
+    }
+
+    if (Array.isArray(req.body.Medicine)) {
+        newFeedings.Medicine = req.body.Medicine.join(", ");
+    } else {
+        newFeedings.Medicine = req.body.Medicine;
+    }
 
     console.log(newFeedings);
 
@@ -223,18 +254,12 @@ exports.delete_feedings = function (req, res) {
 }
 
 exports.post_feedings_update = function (req, res) {
-    let enabled = false;
-    if (req.body.enabled == 'on') {
-        enabled = true;
-    }
 
     const updateData = {
         Date: req.body.Date,
         Bird: req.body.Bird,
-        Food: req.body.Food,
         Amountfed: req.body.AmountFed,
         LeftoverFood: req.body.LeftoverFood,
-        Medicine: req.body.Medicine,
         GoalWeight: req.body.GoalWeight,
         ActualWeight: req.body.ActualWeight,
         WeatherConditions: req.body.WeatherConditions,
@@ -244,7 +269,21 @@ exports.post_feedings_update = function (req, res) {
         GeneralComments: req.body.GeneralComments,
         TrainingComments: req.body.TrainingComments
     };
+
+    if (Array.isArray(req.body.Food)) {
+        updateData.Food = req.body.Food.join(", ");
+    } else {
+        updateData.Food = req.body.Food;
+    }
+
+    if (Array.isArray(req.body.Medicine)) {
+        updateData.Medicine = req.body.Medicine.join(", ");
+    } else {
+        updateData.Medicine = req.body.Medicine;
+    }
+
     console.log(updateData);
+    
     Feeding.findOneAndUpdate({ _id: req.body.id }, updateData, function (err, data) {
         if (err) {
             Sentry.captureException(err);

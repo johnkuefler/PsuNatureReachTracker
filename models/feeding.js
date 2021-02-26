@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const feedingsSchema = new Schema({
     Date: { type: Date, required: true, default: Date.now},
     Bird: { type: String, required: true},
-	Food: { type: String, required: true},
+	Food: { type: String, required: false},
 	AmountFed: { type: String, required: true},
 	LeftoverFood: { type: String, required: true},
 	Medicine: { type: String, required: false},
