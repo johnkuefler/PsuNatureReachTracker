@@ -154,12 +154,15 @@ exports.get_feedings_update = async function (req, res) {
             res.render('feedings/feedingsupdate', 
             { 
                 data: feedings, 
-                feedingFoods: feedings.Food.split(', '),  
+                feedingFoods: feedings.Food.split(", "),  
+                feedingMedicines: feedings.Medicine.split(", "),
                 birds: birds, 
                 foods: foods, 
                 meds: meds, 
                 title: 'Update Feeding' 
             });
+            console.log(feedings.Food.split(", "));
+            console.log(feedings.Medicine.split(", "));
         }
     });
 }
@@ -241,18 +244,12 @@ exports.delete_feedings = function (req, res) {
 }
 
 exports.post_feedings_update = function (req, res) {
-    //let enabled = true;
-    // if (req.body.enabled == 'on') {
-    //     enabled = true;
-    // }
 
     const updateData = {
         Date: req.body.Date,
         Bird: req.body.Bird,
-        //Food: req.body.Food.join(", "),
         Amountfed: req.body.AmountFed,
         LeftoverFood: req.body.LeftoverFood,
-        //Medicine: req.body.Medicine.join(", "),
         GoalWeight: req.body.GoalWeight,
         ActualWeight: req.body.ActualWeight,
         WeatherConditions: req.body.WeatherConditions,

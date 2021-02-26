@@ -188,10 +188,6 @@ bird.animalImage.contentType = "";
 }
 
 exports.post_create_food = function (req, res) {
-    let enabled = true;
-
-
-
 const food = new Food();
 
 food.name = req.body.nameoffood;
@@ -211,8 +207,6 @@ food.foodImage.contentType = "";
 }
 
 exports.post_create_med = function (req, res) {
-
-
 const medication = new Medication();
 
 medication.name = req.body.nameofmedication;

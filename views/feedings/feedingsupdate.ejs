@@ -27,20 +27,6 @@
                         </select>
                     </div>
 
-                    <!-- <div class="form-group col-md-4 col-sm-12">
-                        <label>Food</label>
-                        <select required class="form-control" name="Food">
-                            <option>
-                                <%= data.Food %>
-                            </option>
-                            <% for(var i=0; i<foods.length; i++) { %>
-                                <option value="<%=foods[i].name%>">
-                                    <%=foods[i].name%>
-                                </option>
-                                <% } %>
-                        </select>
-                    </div> -->
-
                     <div class="form-group col-md-4 col-sm-12">
                         <label>Food</label><br>
                             <% for(var i=0; i<foods.length; i++) { %>
@@ -63,27 +49,16 @@
                             value="<%= data.LeftoverFood %>">
                     </div>
 
-                    <!-- <div class="form-group col-md-4 col-sm-12">
-                        <label>Medicine (Optional)</label>
-                        <select class="form-control" name="Medicine">
-                            <option>
-                                <%= data.Medicine %>
-                            </option>
-                            <% for(var i=0; i<meds.length; i++) { %>
-                                <option value="<%=meds[i].name%>">
-                                    <%=meds[i].name%>
-                                </option>
-                                <% } %>
-                        </select>
-                    </div> -->
-
                     <div class="form-group col-md-4 col-sm-12">
                         <label>Medicine (Optional)</label><br>
-    
                             <% for(var i=0; i<meds.length; i++) { %>
-                                <input type="checkbox" value="<%=meds[i].name%>" name="Medicine"> <%=meds[i].name%><br>
+                                <% if (feedingMedicines.find(med =>med == meds[i].name)) { %>
+                                    <input type="checkbox" value="<%=meds[i].name%>" name="Medicine" checked/> <%=meds[i].name%><br>
+                                <% } else { %>
+                                    <input type="checkbox" value="<%=meds[i].name%>" name="Medicine"/> <%=meds[i].name%><br>
                                 <% } %>
-                    </div> 
+                            <% } %>
+                    </div>
 
                     <div class="form-group col-md-4 col-sm-12">
                         <label>Goal Weight (g) (Optional)</label>
