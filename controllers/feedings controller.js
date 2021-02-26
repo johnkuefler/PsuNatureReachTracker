@@ -230,23 +230,6 @@ exports.post_feedings_create = function (req, res) {
     })
 }
 
-// exports.post_feedings_update = function (req, res) {
-//     let enabled = false;
-//     if (req.body.enabled == 'on') {
-//         enabled = true;
-//     }
-
-//     newFeedings.save(function (err) {
-//         if (err) {
-//             Sentry.captureException(err);
-//             res.render('error',{message:'Unable to create feeding',error: err});
-//         } else {
-//             console.log('Feedings saved');
-//             res.redirect('/feedings');
-//         }
-//     })
-// }
-
 exports.delete_feedings = function (req, res) {
     Feeding.findOneAndDelete({ _id: req.query._id }, function (err) {
         if (err) {
