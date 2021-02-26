@@ -30,6 +30,7 @@ exports.post_reset = function (req, res) {
         User.findOneAndUpdate({ _id: res.locals.user._id }, updateData, function (err, data) {
             if (err) {
                 Sentry.captureException(err);
+                res.render('error',{message:'Unable to update password',error: err});
             } else {
                 res.redirect('/login');
             }

@@ -10,6 +10,7 @@ exports.get_feedings = function (req, res) {
     Feeding.find({}, function (err, feedings) {
         if (err) {
             Sentry.captureException(err);
+            res.render('error',{message:'Unable to fetch feedings',error: err});
         } else {
             res.render('feedings/feedings', { data: feedings, title: 'Feedings' });
         }
@@ -20,6 +21,7 @@ exports.get_export_feedings_page = function (req, res) {
     Feeding.find({}, function (err, feedings) {
         if (err) {
             Sentry.captureException(err);
+            res.render('error',{message:'Unable to fetch export feedings page',error: err});
         } else {
             res.render('feedings/exportfeedings', { data: feedings });
         }
@@ -150,6 +152,7 @@ exports.get_feedings_update = async function (req, res) {
     Feeding.findOne({ _id: req.query._id }, function (err, feedings) {
         if (err) {
             Sentry.captureException(err);
+            res.render('error',{message:'Unable to fetch specific update feeding page',error: err});
         } else {
 
             let medicine = [];
@@ -227,26 +230,28 @@ exports.post_feedings_create = function (req, res) {
     })
 }
 
-exports.post_feedings_update = function (req, res) {
-    let enabled = false;
-    if (req.body.enabled == 'on') {
-        enabled = true;
-    }
+// exports.post_feedings_update = function (req, res) {
+//     let enabled = false;
+//     if (req.body.enabled == 'on') {
+//         enabled = true;
+//     }
 
-    newFeedings.save(function (err) {
-        if (err) {
-            Sentry.captureException(err);
-        } else {
-            console.log('Feedings saved');
-            res.redirect('/feedings');
-        }
-    })
-}
+//     newFeedings.save(function (err) {
+//         if (err) {
+//             Sentry.captureException(err);
+//             res.render('error',{message:'Unable to create feeding',error: err});
+//         } else {
+//             console.log('Feedings saved');
+//             res.redirect('/feedings');
+//         }
+//     })
+// }
 
 exports.delete_feedings = function (req, res) {
     Feeding.findOneAndDelete({ _id: req.query._id }, function (err) {
         if (err) {
             Sentry.captureException(err);
+            res.render('error',{message:'Unable to delete feeding',error: err});
         } else {
             res.redirect('/feedings')
         }
@@ -287,6 +292,7 @@ exports.post_feedings_update = function (req, res) {
     Feeding.findOneAndUpdate({ _id: req.body.id }, updateData, function (err, data) {
         if (err) {
             Sentry.captureException(err);
+            res.render('error',{message:'Unable to update feeding',error: err});
         } else {
             res.redirect('/feedings');
         }

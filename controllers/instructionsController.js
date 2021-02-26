@@ -6,6 +6,7 @@ exports.get_instructions = function (req, res) {
         Instruction.find({}, function (err, instructions) {
             if (err) {
                 Sentry.captureException(err);
+                res.render('error',{message:'Unable to fetch instructions page',error: err});
             } else {
                 res.render('settings/instructions/instructions', { data: instructions, title: 'Instructions' });
             }
@@ -39,6 +40,7 @@ exports.post_create_instruction = function (req, res) {
         newInstruction.save(function (err) {
             if (err) {
                 Sentry.captureException(err);
+                res.render('error',{message:'Unable to create instruction',error: err});
             } else {
                 console.log('Instruction saved');
                 res.redirect('/settings/instructions');
@@ -52,6 +54,7 @@ exports.get_instruction_update = function (req, res) {
         Instruction.findOne({ _id: req.query._id }, function (err, instruction) {
             if (err) {
                 Sentry.captureException(err);
+                res.render('error',{message:'Unable to fetch instruction update page',error: err});
             } else {
                 res.render('settings/instructions/instructionsupdate', { data: instruction, title: 'Update Instruction' });
             }
@@ -78,6 +81,7 @@ exports.post_instruction_update = function (req, res) {
     Instruction.findOneAndUpdate({ _id: req.body.id }, updateInstruction, function (err, data) {
         if (err) {
             Sentry.captureException(err);
+            res.render('error',{message:'Unable to update instruction ',error: err});
         } else {
             res.redirect('/settings/instructions');
         }
@@ -88,6 +92,7 @@ exports.delete_instruction = function (req, res) {
     Instruction.findOneAndDelete({ _id: req.query._id }, function (err) {
         if (err) {
             Sentry.captureException(err);
+            res.render('error',{message:'Unable to delete instruction',error: err});
         } else {
             res.redirect('/settings/instructions')
         }
