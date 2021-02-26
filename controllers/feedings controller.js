@@ -151,7 +151,15 @@ exports.get_feedings_update = async function (req, res) {
         if (err) {
             Sentry.captureException(err);
         } else {
-            res.render('feedings/feedingsupdate', { data: feedings, birds: birds, foods: foods, meds: meds, title: 'Update Feeding' });
+            res.render('feedings/feedingsupdate', 
+            { 
+                data: feedings, 
+                feedingFoods: feedings.Food.split(', '),  
+                birds: birds, 
+                foods: foods, 
+                meds: meds, 
+                title: 'Update Feeding' 
+            });
         }
     });
 }
