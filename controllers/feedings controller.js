@@ -151,18 +151,28 @@ exports.get_feedings_update = async function (req, res) {
         if (err) {
             Sentry.captureException(err);
         } else {
+
+            let medicine = [];
+            let food = [];
+
+            if (feedings.Medicine != null) {
+                medicine = feedings.Medicine.split(", ");
+            }
+
+            if (feedings.Food != null) {
+                food = feedings.Food.split(", ");
+            }
+            
             res.render('feedings/feedingsupdate', 
             { 
                 data: feedings, 
-                feedingFoods: feedings.Food.split(", "),  
-                feedingMedicines: feedings.Medicine.split(", "),
+                feedingFoods: food,  
+                feedingMedicines: medicine,
                 birds: birds, 
                 foods: foods, 
                 meds: meds, 
                 title: 'Update Feeding' 
             });
-            console.log(feedings.Food.split(", "));
-            console.log(feedings.Medicine.split(", "));
         }
     });
 }
