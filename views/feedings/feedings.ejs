@@ -112,7 +112,10 @@
           $(document).ready(function () {
             $('#feedingsTable').DataTable({
               responsive: true,
-              order: [[0, "desc"]]
+              order: [[0, "desc"]],
+              columnDefs: [
+    { "type": "date", "targets": 0 }
+  ]
             });
           });
         </script>
