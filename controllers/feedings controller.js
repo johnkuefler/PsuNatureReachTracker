@@ -6,15 +6,14 @@ const excel = require('exceljs');
 const Sentry = require("@sentry/node");
 
 
-exports.get_feedings = function (req, res) {
-    Feeding.find({}, function (err, feedings) {
-        if (err) {
-            Sentry.captureException(err);
-            res.render('error',{message:'Unable to fetch feedings',error: err});
-        } else {
-            res.render('feedings/feedings', { data: feedings, title: 'Feedings' });
-        }
-    })
+exports.get_feedings = async function (req, res) {
+
+    const getFeedings = await Feeding.find({}).sort({Date: 'desc'});
+
+  
+        res.render('feedings/feedings', { data: getFeedings, title: 'Feedings' });
+
+              
 }
 
 exports.get_export_feedings_page = function (req, res) {
