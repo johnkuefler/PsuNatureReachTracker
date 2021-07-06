@@ -11,7 +11,7 @@
         <form method="POST" action="/feedings/create">
 
                 <div class="form-group col-md-4 col-sm-12">
-                    <label>Animal</label>
+                    <label>Animal (Required)</label>
                     <select required class="form-control" name="Bird">
                         <option value="" disabled selected></option>
                         <% for(var i=0; i<birds.length; i++) { %>
@@ -23,20 +23,20 @@
                 </div>
 
                 <div class="form-group col-md-4 col-sm-12">
-                    <label>Food</label><br>
+                    <label>Food (Optional)</label><br>
                         <% for(var i=0; i<foods.length; i++) { %>
                             <input type="checkbox" value="<%=foods[i].name%>" name="Food"> <%=foods[i].name%><br>
                             <% } %>
                 </div>
 
                 <div class="form-group col-md-4 col-sm-12">
-                    <label>Amount Fed (g)</label>
-                    <input required type="text" class="form-control" name="AmountFed">
+                    <label>Amount Fed (g) (Optional)</label>
+                    <input type="text" class="form-control" name="AmountFed">
                 </div>
 
                 <div class="form-group col-md-4 col-sm-12">
-                    <label>Leftover Food (g)</label>
-                    <input required type="text" class="form-control" name="LeftoverFood">
+                    <label>Leftover Food (g) (Optional)</label>
+                    <input type="text" class="form-control" name="LeftoverFood">
                 </div>         
 
                  <div class="form-group col-md-4 col-sm-12">
@@ -56,8 +56,8 @@
                 </div>
 
                 <div class="form-group col-md-4 col-sm-12">
-                    <label>Weather Conditions</label>
-                    <select required class="form-control" name="WeatherConditions">
+                    <label>Weather Conditions (Optional)</label>
+                    <select class="form-control" name="WeatherConditions">
                         <option value="" disabled selected></option>
                         <option value="Sunny">Sunny</option>
                         <option value="Cloudy">Cloudy</option>
@@ -67,13 +67,13 @@
                 </div>
 
                 <div class="form-group col-md-4 col-sm-12">
-                    <label>Daily High Temperature (°F)</label>
-                    <input required type="text" class="form-control" name="DailyHighTemperature">
+                    <label>Daily High Temperature (°F) (Optional)</label>
+                    <input type="text" class="form-control" name="DailyHighTemperature">
                 </div>
 
                 <div class="form-group col-md-4 col-sm-12">
-                    <label>Daily Low Temperature (°F)</label>
-                    <input required type="text" class="form-control" name="DailyLowTemperature">
+                    <label>Daily Low Temperature (°F) (Optional)</label>
+                    <input type="text" class="form-control" name="DailyLowTemperature">
                 </div>
 
                 <div class="form-group col-md-4 col-sm-12">
@@ -87,7 +87,7 @@
                 </div>
 
                 <div class="form-group col-md-4 col-sm-12">
-                    <label>Date & Time</label>
+                    <label>Date & Time (Required)</label>
                     <div class="input-group date" id="datetimepicker" data-target-input="nearest">
                         <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker" name="Date" required/>
                         <div class="input-group-append" data-target="#datetimepicker" data-toggle="datetimepicker">
@@ -104,34 +104,6 @@
     <% include ../partials/scripts %>
 
     <script type="text/javascript">
-        // $(document).ready(function () {
-        //   var today = new Date();
-        //   var dd = today.getDate();
-        //   var mm = today.getMonth()+1;
-        //   var yyyy = today.getFullYear();
-        //   var hh = today.getHours();
-        //   var minutes = today.getMinutes();
-
-        //   if (dd<10) {
-        //       dd= '0' + dd
-        //   }
-
-        //   if (mm<10) {
-        //       mm = '0' + mm
-        //   }
-
-        //   if (hh < 10) {
-        //       hh = '0' + hh
-        //   }
-
-        //   if (minutes < 10) {
-        //       minutes = '0' + minutes
-        //   }
-
-        //   today = yyyy + '-' + mm + '-' + dd + 'T' + hh + ':' + minutes;
-        //   document.getElementById("datetimepicker").setAttribute("max", today);
-        // });
-
         $(function () {
                 $('#datetimepicker').datetimepicker();
             });

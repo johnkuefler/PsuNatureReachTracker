@@ -7,13 +7,9 @@ const Sentry = require("@sentry/node");
 
 
 exports.get_feedings = async function (req, res) {
-
+    
     const getFeedings = await Feeding.find({}).sort({Date: 'desc'});
-
-  
-        res.render('feedings/feedings', { data: getFeedings, title: 'Feedings' });
-
-              
+    res.render('feedings/feedings', { data: getFeedings, title: 'Feedings' });         
 }
 
 exports.get_export_feedings_page = function (req, res) {
@@ -188,8 +184,8 @@ exports.get_feedings_create = async function (req, res) {
     { birds: birds, foods: foods, meds: meds, title: 'Create a Feeding' });
 }
 
-exports.post_feedings_create = function (req, res) {
-    let newFeedings = new Feeding({
+exports.post_feedings_create = async function (req, res) {
+    let newFeeding = await new Feeding({
         Date: req.body.Date,
         Bird: req.body.Bird,
         AmountFed: req.body.AmountFed,
@@ -205,20 +201,18 @@ exports.post_feedings_create = function (req, res) {
     });
 
     if (Array.isArray(req.body.Food)) {
-        newFeedings.Food = req.body.Food.join(", ");
+        newFeeding.Food = req.body.Food.join(", ");
     } else {
-        newFeedings.Food = req.body.Food;
+        newFeeding.Food = req.body.Food;
     }
 
     if (Array.isArray(req.body.Medicine)) {
-        newFeedings.Medicine = req.body.Medicine.join(", ");
+        newFeeding.Medicine = req.body.Medicine.join(", ");
     } else {
-        newFeedings.Medicine = req.body.Medicine;
+        newFeeding.Medicine = req.body.Medicine;
     }
 
-    console.log(newFeedings);
-
-    newFeedings.save(function (err) {
+    newFeeding.save(function (err) {
         if (err) {
             Sentry.captureException(err);
             res.render('error',{message:'Unable to create feeding',error: err});
@@ -268,8 +262,6 @@ exports.post_feedings_update = function (req, res) {
     } else {
         updateData.Medicine = req.body.Medicine;
     }
-
-    console.log(updateData);
     
     Feeding.findOneAndUpdate({ _id: req.body.id }, updateData, function (err, data) {
         if (err) {
