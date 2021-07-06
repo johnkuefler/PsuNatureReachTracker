@@ -11,7 +11,7 @@
         <form method="POST" action="/feedings/create">
 
                 <div class="form-group col-md-4 col-sm-12">
-                    <label>Animal</label>
+                    <label>Animal (Required)</label>
                     <select required class="form-control" name="Bird">
                         <option value="" disabled selected></option>
                         <% for(var i=0; i<birds.length; i++) { %>
@@ -87,7 +87,7 @@
                 </div>
 
                 <div class="form-group col-md-4 col-sm-12">
-                    <label>Date & Time</label>
+                    <label>Date & Time (Required)</label>
                     <div class="input-group date" id="datetimepicker" data-target-input="nearest">
                         <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker" name="Date" required/>
                         <div class="input-group-append" data-target="#datetimepicker" data-toggle="datetimepicker">
