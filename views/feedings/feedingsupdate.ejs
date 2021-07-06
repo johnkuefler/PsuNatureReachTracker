@@ -28,7 +28,7 @@
                     </div>
 
                     <div class="form-group col-md-4 col-sm-12">
-                        <label>Food</label><br>
+                        <label>Food (Optional)</label><br>
                             <% for(var i=0; i<foods.length; i++) { %>
                                 <% if (feedingFoods.find(food =>food == foods[i].name)) { %>
                                     <input type="checkbox" value="<%=foods[i].name%>" name="Food" checked/> <%=foods[i].name%><br>
@@ -39,13 +39,13 @@
                     </div>
 
                     <div class="form-group col-md-4 col-sm-12">
-                        <label>Amount Fed (g)</label>
-                        <input required type="text" class="form-control" name="AmountFed" value="<%= data.AmountFed %>">
+                        <label>Amount Fed (g) (Optional)</label>
+                        <input type="text" class="form-control" name="AmountFed" value="<%= data.AmountFed %>">
                     </div>
 
                     <div class="form-group col-md-4 col-sm-12">
-                        <label>Leftover Food (g)</label>
-                        <input required type="text" class="form-control" name="LeftoverFood"
+                        <label>Leftover Food (g) (Optional)</label>
+                        <input type="text" class="form-control" name="LeftoverFood"
                             value="<%= data.LeftoverFood %>">
                     </div>
 
@@ -73,8 +73,8 @@
                     </div>
 
                     <div class="form-group col-md-4 col-sm-12">
-                        <label>Weather Conditions</label>
-                        <select required class="form-control" name="WeatherConditions">
+                        <label>Weather Conditions (Optional)</label>
+                        <select class="form-control" name="WeatherConditions">
                             <option>
                                 <%= data.WeatherConditions %>
                             </option>
@@ -86,13 +86,13 @@
                     </div>
 
                     <div class="form-group col-md-4 col-sm-12">
-                        <label>Daily High Temperature (°F)</label>
-                        <input required type="text" class="form-control" name="DailyHighTemperature" value="<%= data.DailyHighTemperature %>">
+                        <label>Daily High Temperature (°F) (Optional)</label>
+                        <input type="text" class="form-control" name="DailyHighTemperature" value="<%= data.DailyHighTemperature %>">
                     </div>
     
                     <div class="form-group col-md-4 col-sm-12">
-                        <label>Daily Low Temperature (°F)</label>
-                        <input required type="text" class="form-control" name="DailyLowTemperature" value="<%= data.DailyLowTemperature %>">
+                        <label>Daily Low Temperature (°F) (Optional)</label>
+                        <input type="text" class="form-control" name="DailyLowTemperature" value="<%= data.DailyLowTemperature %>">
                     </div>
 
                     <div class="form-group col-md-4 col-sm-12">
@@ -106,14 +106,6 @@
                         <textarea id="trainingComments" type="text" class="form-control"
                             name="TrainingComments"><%= data.TrainingComments %></textarea>
                     </div>
-
-                    <!-- <div class="form-group col-md-4 col-sm-12">
-                        <label>Date & Time</label>
-                        <div class="well">
-                            <input class="form-control" type="datetime-local" id="datetimepicker" name="Date"
-                                max="2020-12-10T00:00" required value="<%= data.Date %>">
-                        </div>
-                    </div> -->
 
                     <div class="form-group col-md-4 col-sm-12">
                         <label>Date & Time</label>
@@ -135,39 +127,9 @@
             <% include ../partials/scripts %>
 
                 <script type="text/javascript">
-                    // $(document).ready(function () {
-                    //     var today = new Date();
-                    //     var dd = today.getDate();
-                    //     var mm = today.getMonth() + 1;
-                    //     var yyyy = today.getFullYear();
-                    //     var hh = today.getHours();
-                    //     var minutes = today.getMinutes();
-
-                    //     if (dd < 10) {
-                    //         dd = '0' + dd
-                    //     }
-
-                    //     if (mm < 10) {
-                    //         mm = '0' + mm
-                    //     }
-
-                    //     if (hh < 10) {
-                    //         hh = '0' + hh
-                    //     }
-
-                    //     if (minutes < 10) {
-                    //         minutes = '0' + minutes
-                    //     }
-
-                    //     today = yyyy + '-' + mm + '-' + dd + 'T' + hh + ':' + minutes;
-                    //     document.getElementById("datetimepicker").setAttribute("max", today);
-                    // });
-
-
                         $(function () {
                             $('#datetimepicker').datetimepicker('date',new Date('<%= data.Date %>').toLocaleDateString("en-US", { hour: '2-digit' , minute: '2-digit', timeZone: "UTC" }) );
                         });
-                  
                 </script>
 
 

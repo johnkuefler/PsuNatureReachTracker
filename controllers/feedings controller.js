@@ -7,13 +7,9 @@ const Sentry = require("@sentry/node");
 
 
 exports.get_feedings = async function (req, res) {
-
+    
     const getFeedings = await Feeding.find({}).sort({Date: 'desc'});
-
-  
-        res.render('feedings/feedings', { data: getFeedings, title: 'Feedings' });
-
-              
+    res.render('feedings/feedings', { data: getFeedings, title: 'Feedings' });         
 }
 
 exports.get_export_feedings_page = function (req, res) {
@@ -216,8 +212,6 @@ exports.post_feedings_create = function (req, res) {
         newFeedings.Medicine = req.body.Medicine;
     }
 
-    console.log(newFeedings);
-
     newFeedings.save(function (err) {
         if (err) {
             Sentry.captureException(err);
@@ -268,8 +262,6 @@ exports.post_feedings_update = function (req, res) {
     } else {
         updateData.Medicine = req.body.Medicine;
     }
-
-    console.log(updateData);
     
     Feeding.findOneAndUpdate({ _id: req.body.id }, updateData, function (err, data) {
         if (err) {
